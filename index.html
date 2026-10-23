@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>De siervos a ciudadanos</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cabecera tipo cartel de 1789 + barra de pestañas fija; cada pestaña es una herramienta de estudio en una columna de lectura */
+:root{
+  --paper:#F2F4F8; --card:#FFFFFF; --ink:#141F3A; --muted:#566079; --line:#D4DAE6;
+  --bleu:#1F3A93; --bleu-soft:#E3E9FA; --rouge:#B3202A; --rouge-soft:#F9E3E4;
+  --ok:#1B7A4A; --ok-soft:#DFF3E8; --warn:#8A5A00; --warn-soft:#FBF0D9;
+  --display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --body:"Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0D1322; --card:#151D31; --ink:#E6EAF3; --muted:#9BA5BB; --line:#28324B;
+  --bleu:#93A9FF; --bleu-soft:#1C2850; --rouge:#FF7479; --rouge-soft:#3A1A20;
+  --ok:#55C98F; --ok-soft:#14321F; --warn:#F0C060; --warn-soft:#332810; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0D1322; --card:#151D31; --ink:#E6EAF3; --muted:#9BA5BB; --line:#28324B;
+  --bleu:#93A9FF; --bleu-soft:#1C2850; --rouge:#FF7479; --rouge-soft:#3A1A20;
+  --ok:#55C98F; --ok-soft:#14321F; --warn:#F0C060; --warn-soft:#332810; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--card)}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.15;margin:0}
+h2{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:700}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--bleu);outline-offset:2px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* Cabecera */
+header.hero{padding-block:28px 20px;border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end}
+.eyebrow{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.hero h1{font-size:clamp(2.2rem,7vw,3.6rem);font-weight:700;margin-top:6px}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--rouge)}
+.hero .sub{color:var(--muted);margin-top:8px;max-width:52ch}
+.year{font-family:var(--display);font-size:clamp(3.5rem,12vw,6.5rem);line-height:.85;font-weight:700;color:var(--bleu);text-align:right}
+.tricolor{display:flex;height:4px;margin-top:8px}
+.tricolor i{flex:1}.tricolor i:nth-child(1){background:var(--bleu)}.tricolor i:nth-child(2){background:var(--line)}.tricolor i:nth-child(3){background:var(--rouge)}
+@media (max-width:520px){.hero .wrap{grid-template-columns:1fr}.year{text-align:left}}
+
+/* Pestañas */
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--card);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{background:none;border:0;padding:14px 12px 12px;white-space:nowrap;font-weight:600;font-size:.92rem;color:var(--muted);border-bottom:3px solid transparent}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--rouge)}
+main{padding-block:28px 64px}
+section.view{display:grid;gap:20px}
+.lead{color:var(--muted);max-width:65ch}
+
+/* Bloques comunes */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:10px 16px;font-weight:600}
+.btn.primary{background:var(--bleu);border-color:var(--bleu);color:var(--card)}
+.btn:hover{border-color:var(--bleu)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+select{font:inherit;padding:9px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);max-width:100%}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.04em;padding:2px 9px;border-radius:99px;background:var(--bleu-soft);color:var(--bleu)}
+
+/* Temario */
+.apartado{background:var(--card);border:1px solid var(--line);border-radius:10px}
+.apartado>summary{list-style:none;padding:18px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:baseline;cursor:pointer}
+.apartado>summary::-webkit-details-marker{display:none}
+.apartado .num{font-family:var(--display);font-size:1.9rem;font-weight:700;color:var(--rouge);line-height:1}
+.apartado .dia{font-size:.75rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.apartado .chev{color:var(--muted);transition:transform .2s}
+.apartado[open] .chev{transform:rotate(90deg)}
+.apartado .body{padding:0 20px 22px;display:grid;gap:16px;border-top:1px solid var(--line);padding-top:18px}
+.apartado h4{font-family:var(--body);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--bleu);margin:0 0 6px}
+.apartado ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.apartado li{max-width:68ch}
+.fechas{display:flex;flex-wrap:wrap;gap:8px}
+.fecha{font-family:var(--mono);font-size:.8rem;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+.fecha b{color:var(--rouge);font-weight:500}
+.ojo{background:var(--warn-soft);border-left:4px solid var(--warn);border-radius:6px;padding:12px 14px}
+.ojo strong{color:var(--warn)}
+.ojo ul{margin-top:4px}
+.fuente{font-size:.78rem;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--paper);font-weight:600}
+.tablebox{overflow-x:auto}
+.etapas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.etapa{border-radius:8px;padding:10px 12px;border:1px solid var(--line);background:var(--paper)}
+.etapa .mono{font-size:.8rem;color:var(--muted)}
+.etapa b{display:block;font-family:var(--display);font-size:1.05rem}
+@media (max-width:600px){.etapas{grid-template-columns:1fr}}
+
+/* Fichas */
+.flash{perspective:1200px;min-height:260px}
+.flash-inner{position:relative;min-height:260px;transition:transform .45s;transform-style:preserve-3d}
+.flash.flipped .flash-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;overflow:auto}
+.face.back{transform:rotateY(180deg);text-align:left;align-items:flex-start}
+.face .term{font-family:var(--display);font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700}
+.face .hint{font-size:.85rem;color:var(--muted)}
+.face .def{max-width:60ch}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.flash-inner{transition:none}}
+
+/* Test */
+.qhead{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+.qtext{font-family:var(--display);font-size:clamp(1.25rem,3.6vw,1.6rem);font-weight:700;line-height:1.25}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start}
+.opt .k{font-family:var(--mono);color:var(--muted)}
+.opt:hover:not([disabled]){border-color:var(--bleu)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--rouge-soft);border-color:var(--rouge)}
+.opt[disabled]{cursor:default}
+.explain{border-radius:8px;padding:12px 14px;background:var(--bleu-soft)}
+.explain b{color:var(--bleu)}
+.score{font-family:var(--display);font-size:3rem;font-weight:700;color:var(--bleu);line-height:1}
+.fallos{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.fallos li{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--card)}
+.fallos .ok{color:var(--ok);font-weight:600}
+
+/* Cronología */
+.events{display:grid;gap:10px}
+.ev{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:12px 14px;display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center}
+.ev .pos{font-family:var(--mono);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;border:1px dashed var(--line);color:var(--muted);font-size:.85rem}
+.ev.picked .pos{background:var(--bleu);border-color:var(--bleu);color:var(--card);border-style:solid}
+.ev.good{border-color:var(--ok);background:var(--ok-soft)}
+.ev.bad{border-color:var(--rouge);background:var(--rouge-soft)}
+.ev .date{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+
+/* Desarrollo */
+.dev{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:grid;gap:12px}
+.dev .q{font-family:var(--display);font-size:1.2rem;font-weight:700;line-height:1.3}
+.checks{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.checks label{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;cursor:pointer}
+.checks input{margin-top:5px;accent-color:var(--ok)}
+.modelo{border-left:4px solid var(--bleu);padding:4px 0 4px 14px;display:grid;gap:8px}
+
+/* Tarea */
+.tarea h3{margin-bottom:8px}
+.tarea .panel{display:grid;gap:12px}
+.tarea ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.blank{background:var(--bleu-soft);color:var(--bleu);font-weight:600;border-radius:4px;padding:0 5px}
+.copy{font-size:.85rem}
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Geografía e Historia · 4º ESO · Tema 1</div>
+      <h1>De siervos a <em>ciudadanos</em></h1>
+      <p class="sub">Antiguo Régimen, Ilustración y Revolución francesa. Lo que entra en el examen: los puntos del resumen, explicados con la información del libro.</p>
+      <div class="tricolor" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+    <div class="year" aria-hidden="true">1789</div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Secciones">
+  <div class="wrap" role="tablist">
+    <button class="tab" role="tab" data-tab="temario" aria-selected="true">Temario</button>
+    <button class="tab" role="tab" data-tab="fichas" aria-selected="false">Fichas</button>
+    <button class="tab" role="tab" data-tab="test" aria-selected="false">Test</button>
+    <button class="tab" role="tab" data-tab="cronologia" aria-selected="false">Cronología</button>
+    <button class="tab" role="tab" data-tab="personajes" aria-selected="false">Personajes</button>
+    <button class="tab" role="tab" data-tab="desarrollo" aria-selected="false">Preguntas largas</button>
+    <button class="tab" role="tab" data-tab="tarea" aria-selected="false">Tarea</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ TEMARIO ============ -->
+<section class="view" id="v-temario">
+  <p class="lead">Los siete puntos del resumen en el orden del libro. Cada uno tiene lo esencial, las fechas que conviene saberse y un recuadro <strong>Ojo en el examen</strong> con lo que más se confunde. El apartado 4 del libro (los Borbones en España) no está en el resumen.</p>
+
+  <details class="apartado" open>
+    <summary><span class="num">1</span><span><span class="dia">Lunes · martes</span><h3>¿Cómo era el Antiguo Régimen?</h3></span><span class="chev">▸</span></summary>
+    <div class="body">
+      <div><h4>Tres rasgos</h4><p>En el siglo XVIII, las sociedades europeas tenían una <strong>economía agraria tradicional</strong>, estaban divididas en <strong>estamentos</strong> y las gobernaban <strong>monarquías absolutas</strong>.</p></div>
+      <div><h4>Economía: agricultura de subsistencia</h4><ul>
+        <li>Era la actividad principal: técnicas tradicionales, <strong>rendimientos bajos</strong>, orientada al <strong>autoconsumo</strong> y con muy pocos intercambios.</li>
+        <li><strong>Rotación trienal con barbecho</strong>: campos abiertos divididos en tres áreas (trigo de otoño, cereales de primavera y barbecho). Cada vecino tenía parcelas en cada área. El ganado pastaba y abonaba el barbecho.</li>
+        <li><strong>Crisis de subsistencia</strong>: el mal tiempo traía malas cosechas → sube el precio del trigo → hambre y epidemias → revueltas populares.</li>
+      </ul></div>
+      <div><h4>Sociedad estamental</h4><p>Dos grupos separados por el <strong>nacimiento ("sangre")</strong>, no por el dinero. En la cima, el monarca absoluto.</p>
+        <div class="tablebox"><table>
+          <tr><th>Privilegiados</th><th>No privilegiados (Estado llano o Tercer Estado)</th></tr>
+          <tr><td><strong>Nobleza</strong>: tierras e inmuebles ligados a su título; no paga impuestos; leyes y tribunales especiales.<br><strong>Clero</strong>: cobra el <strong>diezmo</strong> (10 % de la cosecha de los campesinos) y tiene grandes propiedades. El alto clero es de origen noble y acapara los cargos eclesiásticos.</td>
+          <td>La mayoría: campesinos, servidumbre, artesanos, comerciantes y ricos burgueses. Todos sin derechos.<br><strong>Campesinos</strong>: arrendatarios o jornaleros en tierras de privilegiados; pagan rentas y derechos señoriales.<br><strong>Artesanos</strong>: atados a las normas del <strong>gremio</strong>, que frenaban la innovación.<br><strong>Comerciantes y banqueros ricos</strong>: querían acceder a cargos y poder.</td></tr>
+        </table></div>
+      </div>
+      <div><h4>Comercio triangular y esclavitud</h4><ul>
+        <li>Europa importaba materias primas de las colonias (azúcar, algodón, tabaco) y vendía manufacturas (armas, telas).</li>
+        <li>Triángulo <strong>Europa → África → América → Europa</strong>: se compraban personas esclavizadas a traficantes africanos a cambio de armas, alcohol, etc., y se vendían en las plantaciones americanas.</li>
+        <li>Grandes beneficios para comerciantes y accionistas europeos.</li>
+      </ul></div>
+      <div><h4>Crecen la población y la producción</h4><ul>
+        <li>Sin las pandemias del siglo anterior ni guerras, y con <strong>alta natalidad</strong>, la población creció.</li>
+        <li>Hacían falta más alimentos: se roturaron <strong>tierras yermas</strong> y se cultivaron <strong>patatas y maíz</strong>.</li>
+        <li>La industria produjo más con dos sistemas nuevos: el <strong>trabajo a domicilio</strong> (el comerciante da la materia prima al artesano y luego recoge y vende lo fabricado) y las <strong>manufacturas</strong> (grandes talleres con muchos artesanos: armas, vidrio, tapices…).</li>
+      </ul></div>
+      <div><h4>La burguesía gana poder</h4><p>El comercio enriqueció a la burguesía (comerciantes, banqueros…) frente a nobles y clérigos, cuya riqueza era la tierra. Tenía más poder e influencia, pero seguía siendo Estado llano: esa <strong>desigualdad ante la ley</strong> resultaba cada vez más incoherente.</p></div>
+      <div class="ojo"><strong>Ojo en el examen</strong><ul>
+        <li>La sociedad se divide por <strong>nacimiento</strong>, no por riqueza: un burgués rico seguía siendo no privilegiado.</li>
+        <li>El <strong>bajo clero</strong> aparece en la pirámide del libro junto a la burguesía, no con el alto clero.</li>
+        <li>No confundas <strong>trabajo a domicilio</strong> (el artesano trabaja en su casa) con <strong>manufactura</strong> (gran taller).</li>
+        <li>Cadena de la crisis de subsistencia: clima → malas cosechas → precios → hambre/epidemias → revueltas.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="apartado">
+    <summary><span class="num">2</span><span><span class="dia">Miércoles</span><h3>¿Qué nuevas formas de pensar surgieron en el siglo XVIII?</h3></span><span class="chev">▸</span></summary>
+    <div class="body">
+      <div><h4>La Ilustración nace del racionalismo</h4><ul>
+        <li>La <strong>revolución científica del siglo XVII</strong> fue la base de un movimiento intelectual nuevo en Europa, sobre todo en <strong>Francia</strong>: la Ilustración.</li>
+        <li>Usaban la <strong>razón</strong> y la <strong>observación</strong> (las herramientas del método científico) para analizar críticamente la realidad, sin la tradición, la revelación religiosa ni la superstición.</li>
+        <li>Querían explicar con la razón todo el saber, desde la metafísica o la política hasta la óptica o la carpintería, confiando en que traería <strong>progreso y felicidad</strong>.</li>
+        <li>Confiaban en la <strong>educación</strong>: enseñar a pensar y formar técnicamente al ciudadano para lograr una sociedad tolerante y próspera.</li>
+      </ul></div>
+      <div><h4>La revolución científica</h4><p>Empezó en el siglo XVII y tuvo su gran auge en el XVIII: medicina, matemáticas, astronomía, biología, cartografía. Expediciones como las de <strong>James Cook</strong> (exploró las costas orientales de Australia) y avances como la <strong>vacuna contra la viruela</strong> de <strong>Edward Jenner</strong>.</p></div>
+      <div><h4>La Enciclopedia</h4><ul>
+        <li>Dirigida por <strong>Diderot</strong> y <strong>D'Alembert</strong>, publicada entre <span class="mono">1751</span> y <span class="mono">1772</span>, <strong>35 volúmenes</strong>, unos <strong>140 especialistas</strong> además de los filósofos. Muchas ilustraciones con grabados.</li>
+        <li>Lenguaje claro y directo para llegar a la burguesía. Su crítica a las tradiciones y a la intolerancia provocó la <strong>censura de la monarquía y de la Iglesia</strong>.</li>
+      </ul></div>
+      <div><h4>¿Qué sociedad proponían?</h4>
+        <div class="tablebox"><table>
+          <tr><th>Pensador</th><th>Idea clave</th></tr>
+          <tr><td><strong>Locke</strong> <span class="mono">1632-1704</span>, inglés</td><td>El Estado nace de un <strong>pacto entre gobernantes e individuos</strong>. Solo es legítimo si respeta los <strong>derechos naturales: vida, libertad y propiedad</strong>, y si un parlamento elegido aprueba las leyes. Influyó en los franceses.</td></tr>
+          <tr><td><strong>Voltaire</strong> <span class="mono">1694-1778</span></td><td>Muy crítico con la religión (intolerancia), los privilegios y el absolutismo. Quería que el <strong>parlamento limitase al rey</strong> y que los <strong>impuestos no recayeran solo en el Tercer Estado</strong>.</td></tr>
+          <tr><td><strong>Montesquieu</strong> <span class="mono">1689-1755</span></td><td><strong>División de poderes</strong>: legislativo (parlamento), ejecutivo (rey y ministros), judicial (jueces independientes).</td></tr>
+          <tr><td><strong>Rousseau</strong> <span class="mono">1712-1778</span></td><td><strong>Contrato social</strong>: pacto entre todos los ciudadanos. <strong>Soberanía nacional</strong>: el poder sale de los ciudadanos y se expresa con el voto. <em>El contrato social</em>, 1762.</td></tr>
+        </table></div>
+        <p style="margin-top:10px">Contra la sociedad estamental: nadie puede heredar privilegios. Defienden la <strong>movilidad social</strong>, la <strong>igualdad ante la ley</strong> y el <strong>mérito</strong>.</p>
+      </div>
+      <div><h4>Liberalismo económico</h4><p>Frente al <strong>mercantilismo</strong> (la riqueza viene del comercio y de acumular metales preciosos), la <strong>fisiocracia</strong> dice que la <strong>agricultura</strong> es la principal fuente de riqueza y que el Estado no debe intervenir. Proponen libre iniciativa, propiedad privada y libertad económica: el <strong>liberalismo económico</strong>.</p></div>
+      <div><h4>Mujeres y salones</h4><p>Mujeres de la alta sociedad organizaban veladas donde se debatían ideas nuevas y se daban a conocer descubrimientos: destacaron Claudine Guérin de Tencin (madre de D'Alembert) y <strong>Madame de Geoffrin</strong>.</p></div>
+      <div class="ojo"><strong>Ojo en el examen</strong><ul>
+        <li>Locke es <strong>inglés</strong> y anterior; los otros tres son franceses y "sentaron las bases del liberalismo político".</li>
+        <li>Montesquieu = <strong>división</strong> de poderes. Rousseau = <strong>soberanía nacional</strong> y contrato social. No los cambies.</li>
+        <li>Fisiocracia = agricultura. Mercantilismo = comercio + metales preciosos. El liberalismo económico va contra el mercantilismo.</li>
+        <li>Enciclopedia: 1751-1772 · 35 volúmenes · ~140 especialistas · Diderot y D'Alembert.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="apartado">
+    <summary><span class="num">3</span><span><span class="dia">Jueves</span><h3>¿Qué alternativa se creó frente a la monarquía absoluta?</h3></span><span class="chev">▸</span></summary>
+    <div class="body">
+      <div><h4>Los reyes tenían un poder absoluto</h4><ul>
+        <li>Sistema más extendido en Europa. <strong>Hereditario</strong> y de <strong>derecho divino</strong>: la autoridad del rey viene directamente de Dios y su persona es sagrada.</li>
+        <li>El rey <strong>concentra los tres poderes</strong> (decide las leyes, las hace ejecutar y aplica justicia) y de él dependen todas las instituciones. No se somete a ningún control. Los habitantes son <strong>súbditos sin derechos</strong>: "el pueblo obedece".</li>
+        <li>Prototipo: <strong>Luis XIV</strong> de Francia, el <strong>Rey Sol</strong> <span class="mono">(1643-1715)</span>. Le asesoraba un Consejo de Estado; ministros y funcionarios nombrados por él; los nobles y clérigos más poderosos tenían cargos en la corte.</li>
+      </ul></div>
+      <div><h4>El Despotismo Ilustrado</h4><ul>
+        <li>Desde mediados del siglo XVIII: <strong>Catalina de Rusia</strong>, <strong>Federico II de Prusia</strong>, <strong>Carlos III de España</strong>.</li>
+        <li>Reformas inspiradas en la Ilustración <strong>sin renunciar al poder absoluto ni a los privilegios</strong>. Lema: <strong>"Todo para el pueblo, pero sin el pueblo"</strong>.</li>
+        <li>Buscaban modernizar la agricultura, desarrollar comercio y manufacturas, eficacia fiscal y administrativa, promover ciencia y economía y fomentar la educación.</li>
+        <li>Chocaron con los privilegios y el absolutismo. La dificultad de reformar <strong>"desde arriba"</strong> abrió paso a las <strong>revoluciones liberales</strong>.</li>
+      </ul></div>
+      <div><h4>Ya existían regímenes parlamentarios</h4><ul>
+        <li>Las revoluciones del <strong>siglo XVII</strong> en <strong>Inglaterra</strong> y los <strong>Países Bajos</strong> acabaron con la monarquía absoluta. Lo logró la burguesía gracias al poder económico y al prestigio del comercio y las manufacturas.</li>
+        <li><strong>Parlamentarismo</strong>: separación de poderes y un parlamento elegido por <strong>propietarios y aristócratas</strong> que hace las leyes y <strong>controla al gobierno</strong>. El Estado respeta los derechos del ciudadano.</li>
+        <li><strong>Habeas Corpus</strong> <span class="mono">(1679)</span>: garantizaba las libertades individuales. <strong>Bill of Rights</strong> <span class="mono">(1689)</span>: limitaba los poderes del monarca y sometía algunas decisiones al parlamento.</li>
+      </ul></div>
+      <div class="tablebox"><table>
+        <tr><th></th><th>Absolutismo</th><th>Despotismo Ilustrado</th><th>Parlamentarismo</th></tr>
+        <tr><td>Quién manda</td><td>El rey, todo</td><td>El rey, todo</td><td>Poderes separados</td></tr>
+        <tr><td>Reformas</td><td>No</td><td>Sí, desde arriba</td><td>Las vota el parlamento</td></tr>
+        <tr><td>Privilegios</td><td>Se mantienen</td><td>Se mantienen</td><td>Se limitan</td></tr>
+        <tr><td>Ejemplo</td><td>Luis XIV</td><td>Carlos III, Catalina, Federico II</td><td>Inglaterra, Países Bajos</td></tr>
+      </table></div>
+      <div class="ojo"><strong>Ojo en el examen</strong><ul>
+        <li>Un déspota ilustrado <strong>sigue siendo absoluto</strong>. La diferencia con el absolutismo "normal" son las reformas, no el poder.</li>
+        <li>Habeas Corpus <span class="mono">1679</span> = libertades individuales. Bill of Rights <span class="mono">1689</span> = limita al rey. Van en ese orden.</li>
+        <li>El parlamento inglés <strong>no</strong> lo elegía todo el pueblo: solo propietarios y aristócratas.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="apartado">
+    <summary><span class="num">5</span><span><span class="dia">Viernes</span><h3>La Revolución francesa. ¿Fue 1789 el año del Tercer Estado?</h3></span><span class="chev">▸</span></summary>
+    <div class="body">
+      <div><h4>Causas profundas: el descontento</h4><ul>
+        <li><strong>Campesinos</strong> (la mayoría): cultivaban tierras que no eran suyas y pagaban impuestos y rentas al rey, a los nobles y a la Iglesia. Con malas cosechas no podían subsistir. Protestaban contra las rentas señoriales y reclamaban la propiedad de la tierra.</li>
+        <li><strong>Ciudades</strong>: trabajadores y artesanos apenas subsistían; los burgueses estaban sometidos a normas que limitaban sus negocios.</li>
+        <li>La <strong>burguesía</strong>, con las ideas ilustradas y el ejemplo de la <strong>Revolución americana</strong>, pedía cambios <strong>económicos</strong> (propiedad, libertad para producir, comprar y vender) y <strong>políticos</strong> (libertad, igualdad ante la ley, participación política: <strong>soberanía nacional</strong> mediante elecciones).</li>
+        <li>El Tercer Estado era el <strong>95 %</strong> de la población; el <strong>5 %</strong> privilegiado no pagaba impuestos, tenía derechos señoriales y se oponía a cualquier cambio.</li>
+      </ul></div>
+      <div><h4>Causa inmediata: la crisis se vuelve política</h4><ul>
+        <li>El rey necesitaba dinero para su nivel de vida y las deudas del Estado. En <span class="mono">1788</span> ya no podía pagar ni los intereses de los préstamos de los banqueros. Única salida: que los <strong>privilegiados también pagasen impuestos</strong>.</li>
+        <li><strong>Luis XVI</strong> convocó los <strong>Estados Generales</strong> el <span class="mono">5 de mayo de 1789</span>, el único organismo que podía aprobar una reforma fiscal. Reunía a representantes de clero, nobleza y Tercer Estado.</li>
+        <li>Los <strong>cuadernos de quejas</strong> recogían las peticiones de cada pueblo: que no se pongan impuestos sin el consentimiento de los Estados Generales y que se abolan los privilegios.</li>
+        <li>El Tercer Estado pidió suprimir los derechos señoriales e instaurar la soberanía nacional; nobles y clérigos defendieron sus privilegios.</li>
+      </ul></div>
+      <div><h4>Así empezó la Revolución</h4><ul>
+        <li>Se votaba <strong>por estamento</strong>: los privilegiados sumaban 2 votos contra 1 y siempre ganaban. El Tercer Estado abandonó la reunión, se constituyó en <strong>Asamblea Nacional</strong> (representantes de toda la nación) y aprobó el <strong>voto por persona</strong>.</li>
+        <li>En una sala de Versalles, el <strong>Juego de Pelota</strong> (<em>Jeu de Paume</em>), juraron seguir reunidos hasta aprobar una <strong>Constitución</strong>. Lo pintó Jacques-Louis David.</li>
+        <li>Los privilegiados amenazaron con el ejército. El pueblo de París asaltó la <strong>Bastilla</strong> el <span class="mono">14 de julio de 1789</span>, símbolo del absolutismo (cualquiera podía ser encerrado allí por voluntad del rey), y tomó sus armas. Hoy es la fiesta nacional de Francia.</li>
+        <li>Mostró que la monarquía no era invulnerable al pueblo. Hubo revueltas en otras ciudades y los campesinos atacaron castillos y propiedades de los señores.</li>
+      </ul></div>
+      <div><h4>Las tres etapas</h4>
+        <div class="etapas">
+          <div class="etapa"><span class="mono">1789-1792</span><b>Monarquía constitucional</b>Burguesía moderada: abolir el Antiguo Régimen, Constitución, parlamento por sufragio censitario (liberalismo moderado).</div>
+          <div class="etapa"><span class="mono">1792-1794</span><b>República social</b>Burguesía radical empujada por las clases populares: república, sufragio universal masculino y leyes sociales igualitarias.</div>
+          <div class="etapa"><span class="mono">1794-1799</span><b>República conservadora</b>Tras la radicalización, la burguesía moderada vuelve al liberalismo moderado (Directorio).</div>
+        </div>
+      </div>
+      <div class="fechas">
+        <span class="fecha"><b>1788</b> el rey no puede pagar los préstamos</span>
+        <span class="fecha"><b>5/5/1789</b> Estados Generales</span>
+        <span class="fecha"><b>1789</b> Asamblea Nacional · Juramento del Juego de Pelota</span>
+        <span class="fecha"><b>14/7/1789</b> toma de la Bastilla</span>
+      </div>
+      <div class="ojo"><strong>Ojo en el examen</strong><ul>
+        <li>Distingue <strong>causas profundas</strong> (malestar económico y social durante todo el siglo XVIII, ideas ilustradas, ejemplo americano) de <strong>causas inmediatas</strong> (bancarrota de 1788, rechazo de las peticiones del Tercer Estado en los Estados Generales).</li>
+        <li>El problema del voto: <strong>por estamento</strong> (gana el privilegio 2-1) frente a <strong>por persona</strong> (gana el Tercer Estado, que tiene más diputados).</li>
+        <li>Orden: Estados Generales → Asamblea Nacional → Juramento del Juego de Pelota → Bastilla.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="apartado">
+    <summary><span class="num">6</span><span><span class="dia">Sábado</span><h3>¿Aceptó el rey la monarquía constitucional?</h3></span><span class="chev">▸</span></summary>
+    <div class="body">
+      <div><h4>Medidas revolucionarias de la Asamblea</h4><ul>
+        <li>La Asamblea Nacional (Tercer Estado más unos pocos nobles y eclesiásticos) se ve como <strong>representante de la nueva nación</strong>: sin privilegios y con todos como <strong>ciudadanos</strong>.</li>
+        <li><strong>Decreto del 4 de agosto de 1789</strong>: abolió los <strong>privilegios</strong> y los <strong>derechos señoriales</strong> de nobleza y clero, y acabó con la justicia y el dominio arbitrario de los señores.</li>
+        <li><strong>Declaración de Derechos del Hombre y del Ciudadano</strong> (<span class="mono">26 de agosto de 1789</span>): derechos y libertades de los nuevos ciudadanos, aunque <strong>excluía a las mujeres y a los esclavos</strong>.</li>
+      </ul></div>
+      <div><h4>La primera Constitución liberal (1791)</h4><ul>
+        <li>La elaboró la <strong>Asamblea Nacional Constituyente</strong>, para regular la convivencia. Muy influyente en Europa.</li>
+        <li><strong>Separación de poderes</strong>: el rey y los ministros tienen el ejecutivo, con una prerrogativa: el <strong>derecho a vetar las leyes</strong>. Legislativo: Asamblea Nacional (345 diputados). Judicial: tribunales y jueces de paz.</li>
+        <li><strong>Igualdad ante la ley</strong>, derechos y libertades, y <strong>soberanía de la nación</strong>.</li>
+        <li><strong>Sufragio censitario</strong>: solo votaban los hombres de más de 25 años que pagasen una contribución. No votaban mujeres, menores de 25, extranjeros ni quien no pagaba.</li>
+        <li>Así nació la <strong>monarquía parlamentaria</strong> en Francia y se eligió la <strong>Asamblea Legislativa</strong>.</li>
+      </ul></div>
+      <div><h4>Hacia una sociedad liberal</h4><ul>
+        <li>Se abolieron los <strong>gremios</strong> y se implantó la <strong>libertad económica</strong> y la <strong>igualdad ante los impuestos</strong>.</li>
+        <li>La Iglesia tuvo que jurar la <strong>Constitución civil del clero</strong>. Sus bienes fueron <strong>expropiados y vendidos</strong> a particulares para reducir su poder y conseguir dinero para el Estado. A cambio, el Estado pagaba el culto y el clero.</li>
+        <li>Se creó la <strong>Guardia Nacional</strong> para defender la Revolución frente a los absolutistas.</li>
+      </ul></div>
+      <div><h4>La contrarrevolución</h4><ul>
+        <li>No aceptaron el cambio: la <strong>familia real</strong> (no quería que le impusieran leyes), la mayoría de los antiguos privilegiados y la <strong>Iglesia</strong>.</li>
+        <li>Conspiraron, y muchos nobles <strong>emigraron</strong> buscando ayuda de las monarquías absolutas, sobre todo <strong>Austria y Prusia</strong>.</li>
+        <li><strong>Luis XVI</strong> intentó huir en <span class="mono">junio de 1791</span> para encabezar la contrarrevolución, pero fue reconocido y detenido en <strong>Varennes</strong>. Desde entonces se le vio como un <strong>traidor a la patria</strong>.</li>
+        <li><span class="mono">Abril de 1792</span>: la Asamblea declaró la guerra a Austria y Prusia. En <span class="mono">julio de 1792</span> el ejército austriaco llegó a las puertas de París: la Revolución estaba en peligro.</li>
+      </ul></div>
+      <div><h4>Las opciones políticas</h4><p>Al principio, todos los que querían acabar con el absolutismo se llamaron <strong>patriotas</strong>; luego se dividieron.</p>
+        <div class="tablebox"><table>
+          <tr><th>Grupo</th><th>Qué querían</th></tr>
+          <tr><td><strong>Absolutistas</strong></td><td>Mantener el Antiguo Régimen. Entre ellos, los <strong>realistas</strong> (nobleza y clero), muchos exiliados.</td></tr>
+          <tr><td><strong>Monárquicos constitucionalistas</strong></td><td>Una monarquía liberal y constitucional.</td></tr>
+          <tr><td><strong>Republicanos moderados: girondinos</strong></td><td>Contra el poder hereditario; todos los poderes electos, con moderación.</td></tr>
+          <tr><td><strong>Republicanos radicales: jacobinos</strong></td><td>Cambios más profundos y más participación popular.</td></tr>
+        </table></div>
+      </div>
+      <div class="ojo"><strong>Ojo en el examen</strong><ul>
+        <li>4 de agosto = <strong>decreto</strong> (fuera privilegios). 26 de agosto = <strong>Declaración</strong> (derechos). Los dos en 1789.</li>
+        <li>La Declaración de 1789 <strong>excluía a mujeres y esclavos</strong>: suelen preguntarlo.</li>
+        <li>Constitución de 1791: el rey <strong>conserva el ejecutivo y el veto</strong>, y el voto es <strong>censitario</strong> (hombres de más de 25 años que pagan).</li>
+        <li>¿Por qué fracasó la monarquía constitucional? Por la oposición del rey y los privilegiados, la huida a Varennes y la guerra contra Austria y Prusia.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="apartado">
+    <summary><span class="num">7</span><span><span class="dia">Domingo</span><h3>¿Qué cambió con la república?</h3></span><span class="chev">▸</span></summary>
+    <div class="body">
+      <div><h4>La república</h4><ul>
+        <li>La traición del rey y la invasión provocaron una insurrección de los <strong>sans-culottes</strong> (clases populares de París; no llevaban el <em>culotte</em>, pantalón anudado bajo la rodilla de las clases altas). Símbolos: gorro frigio (libertad), pica (pueblo en armas), escarapela tricolor.</li>
+        <li><span class="mono">Agosto de 1792</span>: asaltaron el <strong>palacio de las Tullerías</strong>; Luis XVI y María Antonieta, encarcelados.</li>
+        <li>Elecciones por <strong>sufragio universal masculino</strong>. En <span class="mono">septiembre de 1792</span> se formó la <strong>Convención Nacional</strong>: proclamó la <strong>república</strong>, abolió la monarquía y ganó la primera batalla a austriacos y prusianos en <strong>Valmy</strong>.</li>
+        <li>Dos grupos en la Convención: <strong>girondinos</strong> (republicanos moderados; formaron el primer gobierno) y <strong>jacobinos</strong> (radicales, ligados a los sans-culottes).</li>
+      </ul></div>
+      <div><h4>La ejecución de los reyes</h4><ul>
+        <li>La Convención los juzgó y los declaró culpables de <strong>conspiración</strong>. Guillotinados en <span class="mono">1793</span>: Luis XVI el <span class="mono">21 de enero</span>, María Antonieta el <span class="mono">16 de octubre</span>.</li>
+        <li>Dividió a los revolucionarios (casi la mitad de los diputados votó en contra). Dentro, revueltas contrarrevolucionarias; fuera, <strong>Gran Bretaña, Holanda y España</strong> se unieron a Prusia y Austria contra Francia.</li>
+      </ul></div>
+      <div><h4>El Terror (gobierno jacobino)</h4><ul>
+        <li><span class="mono">Junio de 1793</span>: los jacobinos, con parte de la burguesía y los sans-culottes, toman el poder. Gobierno dictatorial del <strong>Comité de Salvación Pública</strong>, con <strong>Robespierre</strong>.</li>
+        <li><strong>Leva en masa</strong>: alistamiento obligatorio de ciudadanos (un ejército de 1,2 millones de soldados) que frenó la amenaza exterior.</li>
+        <li><strong>Constitución y Declaración de Derechos de 1793</strong>: derechos sociales (a la existencia, al trabajo, a la enseñanza, a la asistencia pública).</li>
+        <li>Reformas: <strong>enseñanza obligatoria</strong>, reparto de tierras a los campesinos, <strong>precio máximo</strong> de productos básicos y <strong>salario mínimo</strong>.</li>
+        <li>Pero suspendieron derechos y libertades: el <strong>Terror</strong>. Los tribunales revolucionarios castigaban con cárcel o guillotina a los sospechosos de oponerse (<strong>Ley de sospechosos</strong>). Atacaban a invasores, traidores, especuladores (control de precios) y a la Iglesia (cierre de iglesias).</li>
+      </ul></div>
+      <div><h4>Golpe de Estado y Directorio</h4><ul>
+        <li>La burguesía rechazaba las leyes sociales y el Terror. Los republicanos moderados dieron un golpe en <span class="mono">1794</span>: la <strong>reacción termidoriana</strong>, que acabó con el gobierno jacobino.</li>
+        <li>En <span class="mono">1795</span>, el <strong>Directorio</strong>, de <strong>cinco miembros</strong>. Reforzó el liberalismo económico y una sociedad burguesa; ganaron peso las élites enriquecidas con la guerra y la especulación.</li>
+        <li>Mucha inestabilidad: la <strong>"conjura de los iguales"</strong> y la oposición <strong>neojacobina</strong> pedían el sufragio universal y volver a la Constitución de 1793; además había monárquicos.</li>
+      </ul></div>
+      <div class="ojo"><strong>Ojo en el examen</strong><ul>
+        <li>Reacción termidoriana = <span class="mono">1794</span> (golpe). Directorio = <span class="mono">1795</span> (gobierno de 5). No es lo mismo.</li>
+        <li>Girondinos = moderados. Jacobinos = radicales + sans-culottes + Robespierre.</li>
+        <li>La república social tuvo dos caras: derechos sociales y reformas igualitarias, pero también dictadura y Terror.</li>
+        <li>Valmy es la <strong>primera victoria</strong> de la república (1792), no una derrota.</li>
+      </ul></div>
+    </div>
+  </details>
+
+  <details class="apartado">
+    <summary><span class="num">8</span><span><span class="dia">Lunes · martes + repaso</span><h3>¿Cómo terminó la Revolución francesa?</h3></span><span class="chev">▸</span></summary>
+    <div class="body">
+      <div><h4>Napoleón toma el poder</h4><ul>
+        <li>Parte de la burguesía veía el <strong>Directorio ineficaz</strong>. Pensaban que el <strong>ejército</strong> garantizaría el orden social, la estabilidad económica y el control de la oposición, dominando a absolutistas y a clases populares.</li>
+        <li><span class="mono">1799</span>: <strong>Napoleón Bonaparte</strong>, general popular por sus victorias, dio el <strong>golpe de Brumario</strong>. Acabó con el Directorio y <strong>cerró la Revolución</strong>: fuera las reformas igualitarias y democráticas, fuera la amenaza absolutista, se consolida el <strong>liberalismo moderado</strong>.</li>
+      </ul></div>
+      <div><h4>Un gobierno personalista y autoritario: el Consulado (1799-1804)</h4><ul>
+        <li>Se veía heredero de los cambios de <strong>1789-1791</strong> y quería hacer de Francia la primera potencia de Europa.</li>
+        <li>Nueva Constitución <strong>sin declaración de derechos</strong>, con un poder ejecutivo dominante. Libertades muy limitadas y <strong>censura</strong>.</li>
+        <li>Como <strong>primer cónsul</strong>, promulgaba leyes y nombraba y destituía a gobierno, ejército y administración: una <strong>dictadura personalista</strong>.</li>
+      </ul></div>
+      <div><h4>Consolidó una nueva Francia</h4><ul>
+        <li><strong>Prefectos</strong>: representantes del Estado en los departamentos para hacer cumplir las órdenes del gobierno.</li>
+        <li><strong>Liceos</strong> (escuelas públicas) para formar funcionarios y una élite profesional.</li>
+        <li><strong>Concordato</strong> con la Iglesia católica (<span class="mono">1801</span>), con tolerancia religiosa.</li>
+        <li>Tres códigos: <strong>Civil</strong> (<span class="mono">1804</span>), <strong>de Comercio</strong> (<span class="mono">1807</span>) y <strong>Penal</strong> (<span class="mono">1810</span>). Confirmaban la igualdad ante la ley, la propiedad, la libertad individual y el libre acceso a los cargos públicos.</li>
+        <li>El <strong>Código Civil y la mujer</strong>: debe obedecer al marido, que administra sus bienes y tiene la patria potestad; necesita su permiso para trabajar o ir a juicio; el adulterio femenino se castiga más.</li>
+      </ul></div>
+      <div><h4>El Imperio a la conquista de Europa</h4><ul>
+        <li><span class="mono">1804</span>: se hizo coronar <strong>emperador por el Papa</strong> y conquistó Europa con un gran ejército y métodos militares nuevos. Objetivo: un imperio con Francia en el centro.</li>
+        <li>Unos territorios los anexionó; otros los gobernó su familia. <strong>España</strong>, invadida en <span class="mono">1808</span>: rey <strong>José Bonaparte</strong>, su hermano.</li>
+        <li>Suprimió el absolutismo e impuso <strong>regímenes constitucionales</strong>: al principio, simpatía de reformistas y liberales. Pero eran <strong>invasores</strong> que usaban violencia y explotación, y eso despertó los deseos de <strong>independencia nacional</strong>.</li>
+        <li><span class="mono">1812</span>: máxima extensión. Luego declive: no pudo ocupar <strong>Rusia</strong>, problemas en <strong>España</strong> y una coalición dirigida por <strong>Gran Bretaña</strong> que ocupó París en <span class="mono">1814</span>.</li>
+        <li>Derrota definitiva en <strong>Waterloo</strong> (<span class="mono">1815</span>). Confinado en la isla de <strong>Santa Elena</strong>, donde murió en <span class="mono">1821</span>.</li>
+      </ul></div>
+      <div class="ojo"><strong>Ojo en el examen</strong><ul>
+        <li>Dos etapas: <strong>Consulado</strong> (1799-1804, gobierno personalista y autoritario) e <strong>Imperio</strong> (desde 1804, conquista de Europa).</li>
+        <li>¿Napoleón es heredero de la Revolución? <strong>Sí</strong> en la igualdad ante la ley, la propiedad, los códigos y la administración; <strong>no</strong> en las libertades (censura, sin declaración de derechos) ni en la igualdad de la mujer.</li>
+        <li>Códigos: Civil 1804 · Comercio 1807 · Penal 1810. Concordato 1801.</li>
+        <li>Causas de la caída: Rusia + España + coalición liderada por Gran Bretaña.</li>
+      </ul></div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ FICHAS ============ -->
+<section class="view" id="v-fichas" hidden>
+  <p class="lead">Lee el concepto, intenta definirlo en voz alta y gira la ficha. Marca <strong>La sé</strong> o <strong>Repasar</strong>: las que repases vuelven a salir.</p>
+  <div class="row">
+    <label for="f-tema" class="fuente">Apartado</label>
+    <select id="f-tema"></select>
+    <button class="btn" id="f-shuffle">Barajar</button>
+    <span class="fuente" id="f-count"></span>
+  </div>
+  <div class="meter" aria-hidden="true"><i id="f-meter"></i></div>
+  <div class="flash" id="flash" tabindex="0" role="button" aria-label="Girar ficha">
+    <div class="flash-inner">
+      <div class="face front"><span class="pill" id="f-pill"></span><div class="term" id="f-term"></div><div class="hint">Toca para ver la definición</div></div>
+      <div class="face back"><span class="pill" id="f-pill2"></span><div class="def" id="f-def"></div></div>
+    </div>
+  </div>
+  <div class="row">
+    <button class="btn" id="f-again">Repasar</button>
+    <button class="btn primary" id="f-know">La sé</button>
+  </div>
+</section>
+
+<!-- ============ TEST ============ -->
+<section class="view" id="v-test" hidden>
+  <div id="t-start" class="panel" style="display:grid;gap:14px">
+    <h3>Test tipo examen</h3>
+    <p class="lead">Preguntas con trampa: fechas parecidas, personajes que se confunden y conceptos cercanos. Cada respuesta se explica con lo que dice el libro.</p>
+    <div class="row">
+      <label for="t-tema" class="fuente">Apartado</label><select id="t-tema"></select>
+      <label for="t-n" class="fuente">Preguntas</label>
+      <select id="t-n"><option value="15">15</option><option value="25">25</option><option value="999">Todas</option></select>
+      <button class="btn primary" id="t-go">Empezar</button>
+    </div>
+    <p class="fuente" id="t-best"></p>
+  </div>
+  <div id="t-run" class="panel" style="display:grid;gap:16px" hidden>
+    <div class="qhead"><span id="t-prog"></span><span id="t-tag"></span><span id="t-pts"></span></div>
+    <div class="qtext" id="t-q"></div>
+    <div class="opts" id="t-opts"></div>
+    <div class="explain" id="t-exp" hidden></div>
+    <div class="row"><button class="btn primary" id="t-next" hidden>Siguiente</button></div>
+  </div>
+  <div id="t-end" class="panel" style="display:grid;gap:14px" hidden>
+    <div class="row" style="align-items:baseline"><span class="score" id="t-score"></span><span id="t-msg"></span></div>
+    <h3>Repasa los fallos</h3>
+    <ul class="fallos" id="t-fallos"></ul>
+    <div class="row"><button class="btn primary" id="t-again">Otro test</button></div>
+  </div>
+</section>
+
+<!-- ============ CRONOLOGÍA ============ -->
+<section class="view" id="v-cronologia" hidden>
+  <p class="lead">Toca los acontecimientos <strong>del más antiguo al más reciente</strong>. Si te equivocas, toca otra vez uno marcado para quitarlo. Cuando estén todos, comprueba.</p>
+  <div class="row"><button class="btn" id="c-new">Nueva ronda</button><button class="btn primary" id="c-check" disabled>Comprobar</button><span class="fuente" id="c-res"></span></div>
+  <div class="events" id="c-list"></div>
+</section>
+
+<!-- ============ PERSONAJES ============ -->
+<section class="view" id="v-personajes" hidden>
+  <p class="lead">¿Quién es? Lee la pista y elige el personaje.</p>
+  <div class="panel" style="display:grid;gap:16px">
+    <div class="qhead"><span id="p-prog"></span><span id="p-pts"></span></div>
+    <div class="qtext" id="p-q"></div>
+    <div class="opts" id="p-opts"></div>
+    <div class="explain" id="p-exp" hidden></div>
+    <div class="row"><button class="btn primary" id="p-next" hidden>Siguiente</button></div>
+  </div>
+</section>
+
+<!-- ============ DESARROLLO ============ -->
+<section class="view" id="v-desarrollo" hidden>
+  <p class="lead">Las preguntas largas que pueden caer. Contesta primero en un papel o en voz alta. Después marca los puntos que has dicho y compara con la respuesta modelo. Si te faltan puntos, vuelve al temario.</p>
+  <div id="d-list" style="display:grid;gap:16px"></div>
+</section>
+
+<!-- ============ TAREA ============ -->
+<section class="view tarea" id="v-tarea" hidden>
+  <p class="lead">Actividades de la pizarra: pág. 30 → <strong>72</strong> · pág. 31 → <strong>73 a/b/c</strong>, <strong>74</strong>, <strong>75</strong> (todos menos realistas/monárquicos) y <strong>78</strong>. Todo sale del libro. Cópialo al cuaderno con tus palabras.</p>
+
+  <div class="panel">
+    <h3>72. Mapa conceptual</h3>
+    <p class="fuente">En azul, lo que va en cada hueco.</p>
+    <p><strong>Antiguo Régimen</strong></p>
+    <ul>
+      <li>Economía: basada en la <span class="blank">agricultura</span> de <span class="blank">subsistencia</span>. Uso de la <span class="blank">rotación</span> trienal con barbecho.</li>
+      <li>Sociedad: estamentos <span class="blank">privilegiados</span> (nobleza y <span class="blank">clero</span>); estamento <span class="blank">no privilegiado</span> (<span class="blank">Estado</span> llano o Tercer Estado).</li>
+      <li>Política: Monarquía <span class="blank">absoluta</span>: el rey concentra todos los <span class="blank">poderes</span>. La autoridad del monarca proviene de <span class="blank">Dios</span>.</li>
+    </ul>
+    <p><strong>Transformaciones</strong></p>
+    <ul>
+      <li>Movimiento intelectual: la <span class="blank">Ilustración</span>, cuyos pensadores destacados fueron <span class="blank">Voltaire</span>, <span class="blank">Montesquieu</span> y <span class="blank">Rousseau</span>.</li>
+      <li><span class="blank">Despotismo</span> ilustrado, cuyo lema era "Todo para el pueblo, pero sin el pueblo".</li>
+    </ul>
+    <p><strong>Revolución francesa</strong></p>
+    <ul>
+      <li>Causas a largo plazo: malestar <span class="blank">económico</span> y social de los no privilegiados.</li>
+      <li>Causas inmediatas: rechazo de las ideas del Tercer Estado en los <span class="blank">Estados</span> <span class="blank">Generales</span>.</li>
+      <li>Monarquía constitucional (<span class="blank">1789</span> - <span class="blank">1792</span>).</li>
+      <li><span class="blank">República</span> <span class="blank">social</span> (<span class="blank">1792</span> - <span class="blank">1794</span>).</li>
+      <li>República conservadora o <span class="blank">Directorio</span> (<span class="blank">1794</span> - <span class="blank">1799</span>).</li>
+      <li>Finaliza con: golpe de Estado de <span class="blank">Napoleón</span> (Brumario, 1799).</li>
+    </ul>
+    <p><strong>Restauración · 1815</strong></p>
+    <ul><li>En el <span class="blank">Congreso</span> de <span class="blank">Viena</span> se decidió restaurar el <span class="blank">absolutismo</span>.</li></ul>
+    <p><strong>Revoluciones liberales · oleadas</strong></p>
+    <ul>
+      <li>Revoluciones de <span class="blank">1830</span>.</li>
+      <li>Revoluciones de <span class="blank">1848</span>, conocidas como la <span class="blank">Primavera</span> de los <span class="blank">Pueblos</span>.</li>
+    </ul>
+    <p><strong>Movimientos nacionalistas · nuevos Estados</strong></p>
+    <ul>
+      <li>Independencia de <span class="blank">Grecia</span> y <span class="blank">Bélgica</span>.</li>
+      <li>Unificaciones de <span class="blank">Italia</span> y <span class="blank">Alemania</span>.</li>
+    </ul>
+    <p class="fuente">El libro marca la república conservadora entre 1794 y 1799, pero el Directorio como tal se formó en 1795, tras el golpe de 1794.</p>
+  </div>
+
+  <div class="panel">
+    <h3>73 a. ¿Qué entendemos por Antiguo Régimen? ¿Por qué entró en crisis en el siglo XVIII?</h3>
+    <p>El Antiguo Régimen es el sistema que existía en Europa durante la Edad Moderna. Tenía tres rasgos: una <strong>economía agraria de subsistencia</strong> (técnicas tradicionales, rendimientos bajos, autoconsumo; las malas cosechas provocaban crisis de subsistencia), una <strong>sociedad estamental</strong> dividida por nacimiento en privilegiados (nobleza y clero, que no pagaban impuestos) y no privilegiados (Tercer Estado, sin derechos), y una <strong>monarquía absoluta de derecho divino</strong> en la que el rey concentraba todos los poderes.</p>
+    <p>Entró en crisis porque:</p>
+    <ul>
+      <li>Creció la población y la producción, y el comercio enriqueció a la <strong>burguesía</strong>. Tenía poder económico, pero seguía sin privilegios ni poder político: esa desigualdad era cada vez más difícil de aceptar.</li>
+      <li>La <strong>Ilustración</strong> criticó el absolutismo, los privilegios y la sociedad estamental, y propuso razón, igualdad ante la ley y soberanía nacional.</li>
+      <li>El <strong>Despotismo Ilustrado</strong> chocó con los privilegios: la dificultad de reformar "desde arriba" abrió paso a las revoluciones liberales.</li>
+      <li>En Francia, el malestar de campesinos y clases populares y la quiebra de la Hacienda (1788) hicieron estallar la Revolución.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>73 b. ¿Qué fue la Ilustración? ¿Qué ideas defendían los ilustrados?</h3>
+    <p>Un movimiento intelectual del siglo XVIII, sobre todo en Francia, nacido de la revolución científica del XVII. Usaba la <strong>razón</strong> y la <strong>observación</strong> para analizar críticamente la realidad, sin depender de la tradición, la religión o la superstición. Confiaba en la razón y la ciencia para lograr <strong>progreso y felicidad</strong>, y en la <strong>educación</strong> para formar ciudadanos. Reunió el saber en la <strong>Enciclopedia</strong> (Diderot y D'Alembert, 1751-1772).</p>
+    <ul>
+      <li><strong>Locke</strong>: el Estado nace de un pacto y solo es legítimo si respeta los derechos naturales (vida, libertad, propiedad) y hay un parlamento elegido.</li>
+      <li><strong>Voltaire</strong>: contra la intolerancia, los privilegios y el absolutismo; parlamento que limite al rey; impuestos no solo para el Tercer Estado.</li>
+      <li><strong>Montesquieu</strong>: división de poderes (legislativo, ejecutivo y judicial).</li>
+      <li><strong>Rousseau</strong>: contrato social y soberanía nacional expresada con el voto.</li>
+      <li>Igualdad ante la ley, movilidad social y mérito frente a los privilegios heredados.</li>
+      <li>Economía: fisiocracia (la agricultura es la principal riqueza) y liberalismo económico (libre iniciativa, propiedad privada, sin intervención del Estado).</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>73 c. Diferencias entre régimen absolutista y parlamentario, y entre monarquía y república</h3>
+    <div class="tablebox"><table>
+      <tr><th></th><th>Absolutista</th><th>Parlamentario</th></tr>
+      <tr><td>Poderes</td><td>El rey concentra los tres</td><td>Separación de poderes</td></tr>
+      <tr><td>Origen del poder</td><td>Dios (derecho divino)</td><td>Parlamento elegido (en Inglaterra, por propietarios y aristócratas)</td></tr>
+      <tr><td>Control</td><td>El rey no tiene control</td><td>El parlamento hace las leyes y controla al gobierno</td></tr>
+      <tr><td>Personas</td><td>Súbditos sin derechos</td><td>Ciudadanos con derechos (Habeas Corpus 1679, Bill of Rights 1689)</td></tr>
+    </table></div>
+    <p><strong>Monarquía</strong>: el jefe del Estado es un rey que hereda el cargo; en la monarquía parlamentaria está sometido a la ley (Francia, 1791). <strong>República</strong>: no hay rey; el jefe del Estado es un presidente elegido (Estados Unidos, elegido cada 4 años; Francia desde 1792).</p>
+  </div>
+
+  <div class="panel">
+    <h3>74. Explica estos conceptos</h3>
+    <ul>
+      <li><strong>Monarquía absoluta</strong>: gobierno hereditario y de derecho divino; el rey concentra los tres poderes, no tiene control y los habitantes son súbditos sin derechos. Ejemplo: Luis XIV.</li>
+      <li><strong>Despotismo Ilustrado</strong>: monarcas absolutos del siglo XVIII (Catalina de Rusia, Federico II de Prusia, Carlos III) que hicieron reformas ilustradas sin renunciar a su poder ni a los privilegios. "Todo para el pueblo, pero sin el pueblo".</li>
+      <li><strong>Ilustración</strong>: movimiento intelectual del siglo XVIII que defendía la razón y la observación frente a la tradición y la superstición, y confiaba en la ciencia, el progreso y la educación.</li>
+      <li><strong>Sociedad estamental</strong>: sociedad dividida por nacimiento en privilegiados (nobleza y clero) y no privilegiados (Tercer Estado).</li>
+      <li><strong>Sans-culotte</strong>: clases populares de París; no llevaban el culotte de las clases altas. Asaltaron las Tullerías en 1792 y apoyaron a los jacobinos.</li>
+      <li><strong>Jacobinos</strong>: republicanos radicales de la Convención, ligados a los sans-culottes. Gobernaron en 1793-1794 con Robespierre y el Comité de Salvación Pública e impusieron el Terror.</li>
+      <li><strong>Congreso de Viena</strong>: reunión de 1815 de los vencedores de Napoleón (Austria, Prusia, Rusia, Reino Unido) para restaurar el absolutismo, rehacer el mapa de Europa y crear la Santa Alianza.</li>
+      <li><strong>Constitución</strong>: ley fundamental que fija las reglas de convivencia, organiza el Estado con separación de poderes y recoge los derechos, libertades y obligaciones de los ciudadanos. En Francia, la primera fue la de 1791.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>75. Explica las diferencias (todos menos realistas/monárquicos)</h3>
+    <ul>
+      <li><strong>Sufragio universal / censitario</strong>: en el universal (masculino) votan todos los hombres (Convención, 1792). En el censitario solo los que tienen cierta riqueza o pagan una contribución (1791: hombres de más de 25 años que pagaban). El censitario discrimina por riqueza y, a las mujeres, por género.</li>
+      <li><strong>Soberanía nacional / popular</strong>: las dos dicen que el poder sale de los ciudadanos. La nacional sitúa el poder en la <em>nación</em> y puede limitar el voto a los propietarios (sufragio censitario, 1791). La popular hace que lo ejerza <em>todo el pueblo</em> con sufragio universal masculino (1792; los demócratas de 1848).</li>
+      <li><strong>Absolutismo / liberalismo</strong>: absolutismo = todo el poder en el rey por derecho divino, sin control y con súbditos sin derechos. Liberalismo = división de poderes, soberanía nacional, Constitución, derechos y libertades e igualdad ante la ley; en economía, libre iniciativa, propiedad privada y no intervención del Estado.</li>
+      <li><strong>Imperio plurinacional / nación multiestatal</strong>: un imperio plurinacional es un Estado que domina a muchas naciones (Imperio austriaco: húngaros, checos, eslovacos, croatas…). Una nación multiestatal es un pueblo dividido en varios Estados (Alemania en 39 Estados; Italia en múltiples Estados).</li>
+      <li><strong>Nación / Estado</strong>: nación = personas que comparten lengua, cultura, tradiciones, historia y voluntad de vivir juntas. Estado = organización política que gobierna un territorio: hace leyes para todos, tiene administración y cobra impuestos. Una nación puede no tener Estado propio.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>78. Cuadro-resumen</h3>
+    <div class="tablebox"><table>
+      <tr><th></th><th>Monarquía absoluta</th><th>Régimen parlamentario</th></tr>
+      <tr><td><strong>Separación de poderes</strong></td><td>No. El rey decide las leyes, las hace ejecutar y aplica justicia.</td><td>Sí. Legislativo (parlamento), ejecutivo (gobierno y ministros), judicial (jueces independientes).</td></tr>
+      <tr><td><strong>Origen de la soberanía</strong></td><td>Dios: derecho divino.</td><td>Los ciudadanos, que eligen el parlamento (en Inglaterra, propietarios y aristócratas).</td></tr>
+      <tr><td><strong>Control del gobierno por el parlamento</strong></td><td>No. El rey no tiene control y nombra a sus ministros.</td><td>Sí. El parlamento controla al gobierno; los ministros salen de su mayoría.</td></tr>
+      <tr><td><strong>Respeto a los derechos básicos</strong></td><td>No. Súbditos sin derechos.</td><td>Sí. Habeas Corpus (1679) y Bill of Rights (1689).</td></tr>
+      <tr><td><strong>Aprobación del presupuesto</strong></td><td>La decide el rey.</td><td>La aprueba el parlamento, que elabora el presupuesto del Estado.</td></tr>
+    </table></div>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+"use strict";
+var TEMAS = {1:"1 · Antiguo Régimen",2:"2 · Ilustración",3:"3 · Absolutismo y parlamentarismo",5:"5 · Inicio de la Revolución",6:"6 · Monarquía constitucional",7:"7 · La república",8:"8 · Napoleón"};
+
+function store(k,v){try{if(v===undefined){return JSON.parse(localStorage.getItem("geo1-"+k));}localStorage.setItem("geo1-"+k,JSON.stringify(v));}catch(e){return null;}}
+function $(id){return document.getElementById(id);}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+function fillTemaSelect(sel){sel.innerHTML='<option value="0">Todos</option>'+Object.keys(TEMAS).map(function(k){return '<option value="'+k+'">'+TEMAS[k]+'</option>';}).join("");}
+
+/* ---------- Pestañas ---------- */
+var tabs=[].slice.call(document.querySelectorAll(".tab"));
+function show(name){
+  if(!$("v-"+name)) name="temario";
+  tabs.forEach(function(t){t.setAttribute("aria-selected",t.dataset.tab===name?"true":"false");});
+  [].slice.call(document.querySelectorAll("section.view")).forEach(function(s){s.hidden=s.id!=="v-"+name;});
+  store("tab",name);
+  if(name==="cronologia"&&!cronoReady){newRound();cronoReady=true;}
+  if(name==="personajes"&&!persReady){nextPers();persReady=true;}
+}
+tabs.forEach(function(t){t.addEventListener("click",function(){show(t.dataset.tab);window.scrollTo({top:0});});});
+
+/* ---------- Fichas ---------- */
+var FICHAS=[
+["Agricultura de subsistencia","Agricultura con métodos y técnicas tradicionales, rendimientos bajos y orientada al autoconsumo, con intercambios muy escasos. Era la principal actividad económica del Antiguo Régimen.",1],
+["Rotación trienal con barbecho","Sistema de cultivo en campos abiertos divididos en tres áreas: trigo de otoño, cereales de primavera y barbecho (descanso). Cada vecino tenía parcelas en cada área y el ganado pastaba y fertilizaba el barbecho.",1],
+["Crisis de subsistencia","Crisis periódicas causadas por años de mal tiempo: malas cosechas, alza del precio del trigo, hambre y epidemias, que generaban revueltas populares.",1],
+["Sociedad estamental","Sociedad del Antiguo Régimen dividida en estamentos por el nacimiento («sangre»), no por la riqueza: privilegiados (nobleza y clero) y no privilegiados (Tercer Estado).",1],
+["Privilegiados","Nobleza y clero. La nobleza tenía tierras, no pagaba impuestos y tenía leyes y tribunales especiales. El clero cobraba el diezmo y tenía grandes propiedades.",1],
+["Tercer Estado (Estado llano)","Los no privilegiados: campesinos, servidumbre, artesanos, comerciantes y ricos burgueses. Compartían la falta de derechos. En Francia eran el 95 % de la población.",1],
+["Diezmo","Impuesto del 10 % de la cosecha que los campesinos pagaban a la Iglesia.",1],
+["Derechos señoriales","Rentas y cargas que los campesinos que trabajaban tierras de los privilegiados pagaban a los señores. Fueron abolidos por el decreto del 4 de agosto de 1789.",1],
+["Gremio","Asociación de artesanos de un oficio con normas propias que dificultaban la innovación. Abolidos por la Asamblea francesa.",1],
+["Comercio triangular","Comercio entre Europa, África y América: se llevaban manufacturas a África, se compraban personas esclavizadas que se vendían en las plantaciones americanas y se traían materias primas a Europa.",1],
+["Trabajo a domicilio","Sistema en el que los comerciantes daban la materia prima a los artesanos y después recogían y vendían lo que producían.",1],
+["Manufacturas","Grandes talleres con muchos artesanos para fabricar armas y artículos de lujo (vidrio, tapices…).",1],
+["Burguesía","Grupo del Tercer Estado (comerciantes, banqueros, manufactureros) enriquecido con el comercio. Tenía poder económico pero no privilegios ni poder político.",1],
+["Ilustración","Movimiento intelectual del siglo XVIII, sobre todo en Francia, que usaba la razón y la observación para analizar críticamente la realidad, sin tradición, revelación religiosa ni superstición. Confiaba en el progreso, la felicidad y la educación.",2],
+["Revolución científica","Desarrollo científico iniciado en el siglo XVII con gran auge en el XVIII (medicina, matemáticas, astronomía, biología, cartografía). Ejemplos: expediciones de James Cook y vacuna de la viruela de Edward Jenner.",2],
+["Enciclopedia","Obra que reunió el saber de la época. Dirigida por Diderot y D'Alembert, 1751-1772, 35 volúmenes y unos 140 especialistas. Fue censurada por la monarquía y la Iglesia.",2],
+["Derechos naturales (Locke)","Derechos a la vida, la libertad y la propiedad. Según Locke, el Estado solo es legítimo si los respeta.",2],
+["División de poderes","Propuesta de Montesquieu: poder legislativo (parlamento), ejecutivo (rey y ministros) y judicial (jueces independientes).",2],
+["Contrato social","Idea de Rousseau: la sociedad política nace de un pacto entre todos los ciudadanos.",2],
+["Soberanía nacional","Principio según el cual el poder emana de la nación, del consentimiento de los ciudadanos expresado mediante el voto. Lo planteó Rousseau.",2],
+["Mercantilismo","Idea económica según la cual la prosperidad de un país venía del comercio y de acumular metales preciosos.",2],
+["Fisiocracia","Idea ilustrada según la cual la agricultura es la principal fuente de riqueza y el Estado no debe intervenir en la economía.",2],
+["Liberalismo económico","Libre iniciativa, propiedad privada y libertad económica, sin intervención del Estado.",2],
+["Monarquía absoluta","Gobierno hereditario y de derecho divino: el rey concentra los poderes legislativo, ejecutivo y judicial, sin control, y los habitantes son súbditos sin derechos.",3],
+["Derecho divino","Creencia de que la autoridad del rey procede directamente de Dios y su persona es sagrada.",3],
+["Súbdito","Habitante de una monarquía absoluta, sin derechos, que debe obedecer al rey.",3],
+["Despotismo Ilustrado","Reformas inspiradas en la Ilustración hechas por monarcas absolutos (Catalina de Rusia, Federico II, Carlos III) sin renunciar a su poder ni a los privilegios. «Todo para el pueblo pero sin el pueblo».",3],
+["Parlamentarismo","Sistema basado en la separación de poderes y en un parlamento elegido (por propietarios y aristócratas) que hace las leyes y controla al gobierno; el Estado respeta los derechos del ciudadano. Inglaterra y Países Bajos.",3],
+["Habeas Corpus (1679)","Ley inglesa que garantizaba las libertades individuales.",3],
+["Bill of Rights (1689)","Declaración inglesa que limitaba los poderes del monarca y sometía algunas decisiones al parlamento.",3],
+["Estados Generales","Asamblea con representantes de los tres estamentos (clero, nobleza y Tercer Estado). Luis XVI la convocó el 5 de mayo de 1789 para aprobar una reforma fiscal.",5],
+["Cuadernos de quejas","Documentos con las quejas y peticiones de los estamentos de cada pueblo, que se presentaron al rey al abrirse los Estados Generales.",5],
+["Voto por estamento","Cada estamento tenía un voto: los privilegiados sumaban dos contra uno y siempre ganaban. El Tercer Estado quería votar por persona.",5],
+["Asamblea Nacional","Asamblea formada por los representantes del Tercer Estado que abandonaron los Estados Generales en 1789, diciendo que representaban a toda la nación.",5],
+["Juramento del Juego de Pelota","Compromiso de la Asamblea Nacional, en una sala de Versalles (Jeu de Paume), de seguir reunidos hasta aprobar una Constitución.",5],
+["Toma de la Bastilla","Asalto del pueblo de París a la prisión de la Bastilla, símbolo del absolutismo, el 14 de julio de 1789. Mostró que el pueblo podía vencer al absolutismo.",5],
+["Decreto del 4 de agosto de 1789","Medida de la Asamblea que abolió los privilegios y los derechos señoriales de la nobleza y el clero.",6],
+["Declaración de Derechos del Hombre y del Ciudadano","Texto aprobado el 26 de agosto de 1789 con los derechos y libertades de los ciudadanos. Excluía a las mujeres y a los esclavos.",6],
+["Constitución de 1791","Primera Constitución de la Francia contemporánea: separación de poderes (el rey con el ejecutivo y derecho a veto), igualdad ante la ley, soberanía nacional y sufragio censitario. Creó una monarquía constitucional.",6],
+["Sufragio censitario","Derecho al voto limitado a quienes tienen cierta riqueza. En 1791, hombres de más de 25 años que pagaban una contribución.",6],
+["Constitución civil del clero","Ley que obligó a la Iglesia a aceptar la Constitución. Sus bienes se expropiaron y vendieron; a cambio, el Estado pagaba el culto y el clero.",6],
+["Guardia Nacional","Ejército creado para defender las conquistas de la Revolución frente a los absolutistas.",6],
+["Huida a Varennes","Intento de Luis XVI de huir de Francia en junio de 1791 para encabezar la contrarrevolución. Fue detenido y considerado traidor.",6],
+["Contrarrevolución","Acción de quienes querían acabar con la Revolución: la familia real, los antiguos privilegiados y la Iglesia, con apoyo de Austria y Prusia.",6],
+["Patriotas","Nombre que unió al principio a todos los que querían acabar con el absolutismo, antes de dividirse en monárquicos y republicanos.",6],
+["Sans-culottes","Clases populares de París. No vestían el culotte (pantalón anudado bajo la rodilla) de las clases altas. Asaltaron las Tullerías en 1792.",7],
+["Convención Nacional","Asamblea elegida por sufragio universal masculino en septiembre de 1792. Proclamó la república y abolió la monarquía.",7],
+["Sufragio universal masculino","Derecho al voto de todos los hombres, sin importar su riqueza. Se usó en 1792 para elegir la Convención.",7],
+["Girondinos","Republicanos moderados de la Convención. Formaron el primer gobierno de la república.",7],
+["Jacobinos","Republicanos radicales de la Convención, vinculados a los sans-culottes. Tomaron el poder en junio de 1793 con Robespierre.",7],
+["Comité de Salvación Pública","Órgano que tuvo el poder ejecutivo durante el gobierno jacobino, con Robespierre al frente.",7],
+["Leva en masa","Incorporación obligatoria de los ciudadanos al ejército (1,2 millones de soldados), que frenó la amenaza exterior.",7],
+["El Terror","Política jacobina que suspendió derechos y libertades: los tribunales revolucionarios castigaban con prisión o guillotina a los sospechosos de oponerse a la Convención (Ley de sospechosos).",7],
+["Reacción termidoriana","Golpe de Estado de los republicanos moderados en 1794 que acabó con el gobierno jacobino.",7],
+["Directorio","Gobierno de cinco miembros (1795-1799). Reforzó el liberalismo económico y una sociedad burguesa, con mucha inestabilidad.",7],
+["Golpe de Brumario","Golpe de Estado de Napoleón en 1799 que acabó con el Directorio y cerró la Revolución.",8],
+["Consulado","Gobierno de Napoleón (1799-1804): Constitución sin declaración de derechos, poder ejecutivo dominante, censura y dictadura personalista del primer cónsul.",8],
+["Prefectos","Representantes del Estado en los departamentos, creados por Napoleón para hacer cumplir las órdenes del gobierno.",8],
+["Liceos","Escuelas públicas fundadas por Napoleón para educar a los funcionarios y crear una élite profesional.",8],
+["Concordato (1801)","Acuerdo de Napoleón con la Iglesia católica que restableció las relaciones y admitía la tolerancia religiosa.",8],
+["Código Civil (1804)","Código de Napoleón que confirmaba la igualdad ante la ley, la propiedad y la libertad individual, pero sometía la mujer al marido.",8],
+["Imperio napoleónico","Etapa desde 1804, cuando Napoleón se coronó emperador y conquistó Europa. Máxima extensión en 1812; derrota final en Waterloo (1815).",8]
+];
+var fState={deck:[],i:0,known:store("known")||{}};
+fillTemaSelect($("f-tema"));
+function buildDeck(){var t=+$("f-tema").value;fState.deck=shuffle(FICHAS.filter(function(f){return !t||f[2]===t;}));fState.i=0;renderCard();}
+function renderCard(){
+  var deck=fState.deck,f=deck[fState.i%deck.length];
+  $("flash").classList.remove("flipped");
+  $("f-term").textContent=f[0];$("f-def").textContent=f[1];
+  $("f-pill").textContent=TEMAS[f[2]];$("f-pill2").textContent=f[0];
+  var k=deck.filter(function(x){return fState.known[x[0]];}).length;
+  $("f-count").textContent=k+" de "+deck.length+" sabidas";
+  $("f-meter").style.width=(100*k/deck.length)+"%";
+}
+function flip(){$("flash").classList.toggle("flipped");}
+$("flash").addEventListener("click",flip);
+$("flash").addEventListener("keydown",function(e){if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();}});
+$("f-know").addEventListener("click",function(){var f=fState.deck[fState.i%fState.deck.length];fState.known[f[0]]=1;store("known",fState.known);fState.i++;renderCard();});
+$("f-again").addEventListener("click",function(){var f=fState.deck.splice(fState.i%fState.deck.length,1)[0];delete fState.known[f[0]];store("known",fState.known);var pos=Math.min(fState.deck.length,(fState.i%Math.max(fState.deck.length,1))+3);fState.deck.splice(pos,0,f);renderCard();});
+$("f-shuffle").addEventListener("click",buildDeck);
+$("f-tema").addEventListener("change",buildDeck);
+buildDeck();
+
+/* ---------- Test ---------- */
+var Q=[
+["¿Qué sistema de cultivo se usaba en el Antiguo Régimen?",["Rotación trienal con barbecho","Rotación bienal sin barbecho","Regadío intensivo","Monocultivo de patata"],0,"Campos abiertos divididos en tres áreas: trigo de otoño, cereales de primavera y barbecho, que el ganado pastaba y fertilizaba.",1],
+["¿Qué desencadenaba una crisis de subsistencia?",["Años de climatología adversa que traían malas cosechas","La subida de impuestos de la nobleza","La llegada de esclavos de África","Las guerras con Inglaterra"],0,"Mal tiempo → malas cosechas → alza del precio del trigo → hambre y epidemias → revueltas populares.",1],
+["Las diferencias entre los estamentos se basaban en…",["El nacimiento («sangre»)","La riqueza","La profesión","La religión"],0,"El libro insiste: eran diferencias de «sangre» o nacimiento, no económicas. Por eso un burgués rico seguía siendo no privilegiado.",1],
+["¿Qué era el diezmo?",["El 10 % de la cosecha que los campesinos pagaban a la Iglesia","Un impuesto que pagaba la nobleza al rey","La décima parte de las tierras del rey","Un derecho señorial de los burgueses"],0,"La Iglesia recibía los diezmos (10 % de la cosecha) y tenía grandes propiedades.",1],
+["¿Quién de estos NO formaba parte del Tercer Estado?",["El alto clero","Los ricos burgueses","Los artesanos","Los jornaleros"],0,"El alto clero era privilegiado (de origen noble). Los ricos burgueses, aunque tuvieran dinero, eran Estado llano.",1],
+["¿Por qué los gremios eran un problema?",["Sus normas dificultaban la innovación","Cobraban el diezmo","Impedían el comercio triangular","Controlaban el ejército"],0,"Los artesanos seguían sujetos a las normas de su gremio, que dificultaban la innovación.",1],
+["En el comercio triangular, ¿qué se llevaba de Europa a África?",["Armas, alcohol y telas a cambio de esclavos","Azúcar, algodón y tabaco","Oro y plata","Esclavos para trabajar en Europa"],0,"Las manufacturas (armas, alcohol…) se cambiaban en África por personas esclavizadas, que se vendían en las plantaciones americanas.",1],
+["¿Por qué creció la población europea en el siglo XVIII?",["No hubo grandes pandemias ni guerras y la natalidad era alta","Llegaron millones de colonos de América","Se prohibió emigrar","Mejoró la medicina gracias a la Enciclopedia"],0,"Sin mortalidad catastrófica, la alta natalidad hizo aumentar la población.",1],
+["¿Qué cultivos nuevos se introdujeron para alimentar a más gente?",["Patatas y maíz","Trigo y cebada","Arroz y caña de azúcar","Vid y olivo"],0,"Se roturaron tierras yermas y se introdujo el cultivo de patatas y maíz.",1],
+["¿En qué consistía el trabajo a domicilio?",["El comerciante daba la materia prima al artesano y luego recogía y vendía el producto","Grandes talleres con muchos artesanos","Los campesinos trabajaban las tierras del señor","Los esclavos trabajaban en casas de nobles"],0,"No confundir con las manufacturas, que eran grandes talleres.",1],
+["¿Por qué la situación de la burguesía era incoherente?",["Era cada vez más rica e influyente, pero seguía sin igualdad ante la ley por ser Estado llano","Era privilegiada pero pobre","No pagaba impuestos pero no tenía tierras","Controlaba la Iglesia pero no el comercio"],0,"El comercio la enriqueció frente a nobles y clérigos, pero seguía siendo no privilegiada.",1],
+["¿Dónde tuvo especial importancia la Ilustración?",["En Francia","En España","En Rusia","En Estados Unidos"],0,"Un nuevo movimiento intelectual en Europa, y en particular en Francia.",2],
+["¿Cuáles eran los instrumentos básicos del método científico para los ilustrados?",["La razón y la observación","La fe y la tradición","La revelación y la experiencia","La autoridad del rey y de la Iglesia"],0,"Con ellas analizaban críticamente la realidad, prescindiendo de la tradición, la revelación religiosa y la superstición.",2],
+["¿Quiénes dirigieron la Enciclopedia?",["Diderot y D'Alembert","Voltaire y Rousseau","Montesquieu y Locke","Diderot y Voltaire"],0,"Dirigida por Diderot y D'Alembert, publicada entre 1751 y 1772.",2],
+["¿Cuántos volúmenes tenía la Enciclopedia?",["35","140","17","72"],0,"35 volúmenes. El 140 es el número aproximado de especialistas que colaboraron.",2],
+["¿Por qué sufrió censura la Enciclopedia?",["Por su crítica a las tradiciones y a la intolerancia","Porque estaba escrita en latín","Porque apoyaba al rey","Porque era muy cara"],0,"Su crítica a las tradiciones y la intolerancia provocó la oposición y censura de la monarquía y la Iglesia.",2],
+["¿Quién descubrió la vacuna contra la viruela?",["Edward Jenner","James Cook","D'Alembert","Montesquieu"],0,"James Cook fue el explorador que recorrió las costas orientales de Australia.",2],
+["Según Locke, ¿cuándo es legítimo el Estado?",["Cuando respeta los derechos naturales (vida, libertad, propiedad) y hay un parlamento elegido","Cuando el rey tiene el poder de Dios","Cuando no cobra impuestos","Cuando lo gobiernan los filósofos"],0,"Para Locke, el Estado nace de un pacto entre gobernantes e individuos.",2],
+["¿Quién propuso la división de poderes?",["Montesquieu","Rousseau","Voltaire","Locke"],0,"Legislativo (parlamento), ejecutivo (rey y ministros) y judicial (jueces independientes).",2],
+["¿Quién planteó el principio de soberanía nacional?",["Rousseau","Montesquieu","Voltaire","Luis XIV"],0,"Rousseau, en El contrato social (1762): el poder emana del consentimiento de los ciudadanos, expresado mediante el voto.",2],
+["¿Qué defendió Voltaire sobre los impuestos?",["Que no recayeran solo sobre el Tercer Estado","Que los pagase solo la Iglesia","Que se suprimieran todos","Que los fijase el rey libremente"],0,"También quería que el parlamento limitase el poder del rey.",2],
+["Según la fisiocracia, ¿cuál es la principal fuente de riqueza?",["La agricultura","El comercio","La acumulación de metales preciosos","La industria"],0,"El comercio y los metales preciosos son la idea del mercantilismo, contra el que iban los ilustrados.",2],
+["En una monarquía absoluta, ¿de dónde viene la autoridad del rey?",["De Dios","Del pueblo","Del parlamento","De la nobleza"],0,"Era hereditaria y de derecho divino; la persona del rey se consideraba sagrada.",3],
+["¿Quién fue el prototipo de monarca absoluto?",["Luis XIV de Francia","Luis XVI de Francia","Carlos III de España","Federico II de Prusia"],0,"Luis XIV (1643-1715), el Rey Sol.",3],
+["¿Cuál era la expresión del Despotismo Ilustrado?",["«Todo para el pueblo, pero sin el pueblo»","«Libertad, igualdad, fraternidad»","«El Estado soy yo y el pueblo»","«Todo por el pueblo y con el pueblo»"],0,"Hacían reformas para el interés general pero sin cuestionar su poder absoluto.",3],
+["¿Cuál de estos NO fue un déspota ilustrado?",["Luis XIV","Catalina de Rusia","Federico II de Prusia","Carlos III de España"],0,"Luis XIV es el ejemplo de monarca absoluto, no de déspota ilustrado (que es de mediados del siglo XVIII).",3],
+["¿Por qué el Despotismo Ilustrado abrió paso a las revoluciones liberales?",["Porque reformar la sociedad «desde arriba» chocaba con los privilegios y el absolutismo","Porque los reyes renunciaron al poder","Porque prohibió la Ilustración","Porque dio el voto a todos"],0,"La dificultad de reformar desde arriba abrió paso a las revoluciones liberales.",3],
+["¿Qué garantizaba el Habeas Corpus (1679)?",["Las libertades individuales","El poder absoluto del rey","El voto de las mujeres","La libertad de comercio"],0,"El Bill of Rights (1689) es el que limitaba los poderes del monarca.",3],
+["¿Quién elegía el parlamento en el parlamentarismo inglés?",["Propietarios y aristócratas","Todos los hombres mayores de edad","Todos los ciudadanos","El rey"],0,"Era un parlamento elegido por propietarios y aristócratas que hacía las leyes y controlaba al gobierno.",3],
+["¿Qué grupo social logró poner fin a la monarquía absoluta en Inglaterra y Países Bajos?",["La nueva burguesía","El alto clero","Los campesinos","La nobleza de corte"],0,"Lo logró gracias al poder económico y al prestigio del comercio y las manufacturas.",3],
+["¿Qué porcentaje de la población francesa era el Tercer Estado?",["95 %","50 %","75 %","5 %"],0,"El 5 % restante eran los privilegiados (nobles e Iglesia).",5],
+["¿Por qué convocó Luis XVI los Estados Generales?",["Para aprobar una reforma fiscal: necesitaba que los privilegiados pagasen impuestos","Para redactar una Constitución","Para declarar la guerra a Austria","Para abolir los derechos señoriales"],0,"En 1788 no podía pagar ni los intereses de los préstamos; los Estados Generales eran el único organismo que podía aprobar una reforma fiscal.",5],
+["¿Cuándo se reunieron los Estados Generales?",["5 de mayo de 1789","14 de julio de 1789","4 de agosto de 1789","26 de agosto de 1789"],0,"14 de julio: Bastilla. 4 de agosto: decreto. 26 de agosto: Declaración.",5],
+["¿Qué modelo aportó ideas a la burguesía francesa, además de la Ilustración?",["La Revolución americana","El Imperio napoleónico","El Despotismo Ilustrado español","La Santa Alianza"],0,"Los principios ilustrados y el modelo de la Revolución americana.",5],
+["¿Por qué los diputados del Tercer Estado abandonaron los Estados Generales?",["Se votaba por estamento y los privilegiados siempre ganaban sumando sus dos votos","El rey los expulsó","Querían ir a tomar la Bastilla","No les dejaban hablar en francés"],0,"Se constituyeron en Asamblea Nacional y aprobaron la votación por persona.",5],
+["¿A qué se comprometieron en el Juramento del Juego de Pelota?",["A seguir reunidos hasta aprobar una Constitución","A ejecutar al rey","A proclamar la república","A declarar la guerra a Prusia"],0,"En una sala de Versalles (Jeu de Paume).",5],
+["¿Por qué la Bastilla era un símbolo del absolutismo?",["Era una prisión donde cualquiera podía ser encerrado por voluntad del monarca","Era el palacio del rey","Allí se reunían los Estados Generales","Era la sede de la Iglesia"],0,"Su toma, el 14 de julio de 1789, mostró que la monarquía no era invulnerable al pueblo.",5],
+["¿Cuál es la secuencia correcta de 1789?",["Estados Generales → Asamblea Nacional → Bastilla → Declaración de Derechos","Bastilla → Estados Generales → Asamblea Nacional → Declaración","Asamblea Nacional → Estados Generales → Declaración → Bastilla","Declaración → Bastilla → Estados Generales → Asamblea"],0,"5 de mayo, luego la Asamblea y el Juramento, 14 de julio y 26 de agosto.",5],
+["¿Qué etapa va de 1792 a 1794?",["La república social","La monarquía constitucional","La república conservadora","El Consulado"],0,"Monarquía constitucional 1789-1792 · república social 1792-1794 · república conservadora 1794-1799.",5],
+["¿Qué abolió el decreto del 4 de agosto de 1789?",["Los privilegios y los derechos señoriales","La monarquía","Los gremios","La esclavitud en las colonias"],0,"Los gremios se abolieron después, con la Asamblea Legislativa.",6],
+["¿A quién excluía la Declaración de Derechos de 1789?",["A las mujeres y a los esclavos","A los burgueses","A los campesinos","A los mayores de 25 años"],0,"Aun así, definía a los nuevos ciudadanos y su defensa ha sido clave para nuestra sociedad.",6],
+["En la Constitución de 1791, ¿qué poder conservaba el rey?",["El ejecutivo, con derecho a vetar las leyes","El legislativo","El judicial","Ninguno"],0,"Había separación de poderes, pero el rey tenía la prerrogativa del veto.",6],
+["¿Quién podía votar con la Constitución de 1791?",["Los hombres de más de 25 años que pagaban una contribución","Todos los hombres","Todos los ciudadanos, hombres y mujeres","Solo los nobles"],0,"Sufragio censitario.",6],
+["¿Qué se hizo con los bienes de la Iglesia?",["Se expropiaron y vendieron para reducir la deuda del Estado","Se repartieron gratis entre los campesinos","Se entregaron a la nobleza","Se conservaron intactos"],0,"A cambio, el Estado aseguraba el mantenimiento del culto y del clero (Constitución civil del clero).",6],
+["¿Para qué se creó la Guardia Nacional?",["Para defender la Revolución frente a los absolutistas","Para proteger al rey","Para invadir España","Para cobrar impuestos"],0,"",6],
+["¿Qué pasó en Varennes?",["Detuvieron a Luis XVI cuando intentaba huir de Francia (junio de 1791)","Se ejecutó a María Antonieta","Francia ganó su primera batalla","Napoleón dio su golpe de Estado"],0,"Desde entonces el rey fue considerado un traidor a la patria. La primera victoria fue en Valmy (1792).",6],
+["¿A quién declaró la guerra la Asamblea en abril de 1792?",["A Austria y Prusia","A Inglaterra y España","A Rusia","A Holanda"],0,"En julio de 1792 los austriacos llegaron a las puertas de París.",6],
+["¿Qué querían los monárquicos constitucionalistas?",["Una monarquía liberal y constitucional","Mantener el Antiguo Régimen","Una república radical","Que todos los poderes fueran electos"],0,"Los absolutistas querían mantener el Antiguo Régimen; los republicanos, que todos los poderes fueran electos.",6],
+["¿Por qué se llamaba sans-culottes a las clases populares de París?",["Porque no vestían el culotte, pantalón anudado bajo la rodilla de las clases altas","Porque no tenían derecho a voto","Porque vivían fuera de París","Porque eran jacobinos"],0,"Símbolos: gorro frigio (libertad), pica (pueblo en armas), escarapela tricolor.",7],
+["¿Qué sucedió en agosto de 1792?",["Asalto al palacio de las Tullerías y encarcelamiento de los reyes","Ejecución de Luis XVI","Toma de la Bastilla","Golpe termidoriano"],0,"Luis XVI fue ejecutado en enero de 1793.",7],
+["¿Cómo se eligió la Convención Nacional?",["Por sufragio universal masculino","Por sufragio censitario","La nombró el rey","Por voto de los nobles"],0,"Se formó en septiembre de 1792 y proclamó la república.",7],
+["¿Qué fue Valmy?",["La primera victoria militar de la república contra austriacos y prusianos","La derrota final de Napoleón","El lugar donde detuvieron al rey","El palacio de los reyes"],0,"",7],
+["¿Quiénes eran los girondinos?",["Republicanos moderados","Republicanos radicales","Absolutistas","Monárquicos constitucionalistas"],0,"Formaron el primer gobierno de la república. Los radicales eran los jacobinos.",7],
+["¿Quién estaba al frente del Comité de Salvación Pública?",["Robespierre","Napoleón","Luis XVI","Diderot"],0,"Los jacobinos tomaron el poder en junio de 1793.",7],
+["¿Qué era la leva en masa?",["La incorporación obligatoria de los ciudadanos al ejército","Un impuesto sobre el trigo","La venta de los bienes de la Iglesia","La ley para perseguir sospechosos"],0,"Un ejército de 1,2 millones de soldados que frenó la amenaza exterior.",7],
+["¿Qué reconocía la Constitución jacobina de 1793?",["Derechos sociales: a la existencia, al trabajo, a la enseñanza, a la asistencia pública","El sufragio censitario","El derecho de veto del rey","Los privilegios de la nobleza"],0,"",7],
+["¿Cuál de estas medidas NO fue jacobina?",["La Constitución civil del clero","La enseñanza obligatoria","El precio máximo de productos básicos","El salario mínimo"],0,"La Constitución civil del clero es de la etapa de la monarquía constitucional.",7],
+["¿Qué fue la reacción termidoriana?",["El golpe de los republicanos moderados en 1794 que acabó con los jacobinos","El golpe de Napoleón en 1799","La reacción de los absolutistas tras la ejecución del rey","La huida del rey a Varennes"],0,"Después, en 1795, se formó el Directorio.",7],
+["¿Cuántos miembros tenía el Directorio?",["Cinco","Tres","Uno","Doce"],0,"Tres serían los cónsules del Consulado; el Directorio era de cinco.",7],
+["¿Qué pedía la oposición neojacobina al Directorio?",["Sufragio universal y volver a la Constitución de 1793","Restaurar a Luis XVI","Que Napoleón fuera emperador","Volver al sufragio censitario"],0,"También hubo la «conjura de los iguales».",7],
+["¿Por qué parte de la burguesía apoyó a Napoleón?",["Veía ineficaz al Directorio y creía que el ejército garantizaría orden y estabilidad","Quería volver al absolutismo","Quería el sufragio universal","Quería una república social"],0,"El objetivo era un régimen fuerte que dominase a absolutistas y a clases populares.",8],
+["¿Cómo se llamó el golpe de Estado de Napoleón en 1799?",["Golpe de Brumario","Reacción termidoriana","Golpe de Varennes","Golpe de Valmy"],0,"Terminó con el Directorio y clausuró la Revolución.",8],
+["¿Qué le faltaba a la Constitución del Consulado?",["Una declaración de derechos","Un poder ejecutivo","Un primer cónsul","Un nombre"],0,"Daba un fuerte predominio al ejecutivo; libertades muy limitadas y censura.",8],
+["¿Qué eran los prefectos?",["Representantes del Estado en los departamentos","Profesores de los liceos","Obispos nombrados por el Papa","Generales del ejército"],0,"Hacían cumplir las órdenes del gobierno.",8],
+["¿Qué estableció el Concordato de 1801?",["Restableció las relaciones con la Iglesia y admitía la tolerancia religiosa","Abolió la Iglesia","Vendió los bienes de la Iglesia","Hizo a Napoleón Papa"],0,"",8],
+["¿En qué orden se promulgaron los códigos napoleónicos?",["Civil 1804, Comercio 1807, Penal 1810","Penal 1804, Civil 1807, Comercio 1810","Comercio 1804, Penal 1807, Civil 1810","Los tres en 1804"],0,"Confirmaban igualdad ante la ley, propiedad, libertad individual y libre acceso a cargos públicos.",8],
+["¿Qué decía el Código Civil sobre la mujer casada?",["Debía obedecer al marido, que administraba sus bienes","Tenía los mismos derechos que el hombre","Podía votar","Tenía la patria potestad de los hijos"],0,"Necesitaba permiso del marido para trabajar o ir a juicio; el adulterio femenino era más grave.",8],
+["¿Quién coronó a Napoleón como emperador en 1804?",["Se hizo coronar por el Papa","Luis XVI","La Convención","El zar de Rusia"],0,"",8],
+["¿Quién fue nombrado rey de España tras la invasión de 1808?",["José Bonaparte, hermano de Napoleón","Carlos III","Luis XVIII","Napoleón"],0,"",8],
+["¿Por qué crecieron los movimientos de independencia nacional contra Napoleón?",["Los franceses eran invasores y dominaban con violencia y explotación","Napoleón restauró el absolutismo","Los países ocupados querían ser franceses","Por el Concordato"],0,"Al principio, sus regímenes constitucionales despertaron simpatía entre reformistas y liberales.",8],
+["¿Cuál NO fue una causa del declive del Imperio?",["La conjura de los iguales","La imposibilidad de ocupar Rusia","Las dificultades en España","Una coalición encabezada por Gran Bretaña"],0,"La conjura de los iguales fue contra el Directorio, antes de Napoleón.",8],
+["¿Dónde fue derrotado definitivamente Napoleón?",["Waterloo (1815)","Valmy (1792)","Varennes (1791)","Santa Elena (1821)"],0,"Santa Elena es la isla donde fue confinado y murió en 1821.",8]
+];
+var t={list:[],i:0,ok:0,fallos:[]};
+fillTemaSelect($("t-tema"));
+function showBest(){var b=store("best");$("t-best").textContent=b?"Tu mejor resultado: "+b+" %":"Hay "+Q.length+" preguntas en total.";}
+showBest();
+$("t-go").addEventListener("click",function(){
+  var tema=+$("t-tema").value,n=+$("t-n").value;
+  t.list=shuffle(Q.filter(function(q){return !tema||q[4]===tema;})).slice(0,n);
+  t.i=0;t.ok=0;t.fallos=[];
+  $("t-start").hidden=true;$("t-end").hidden=true;$("t-run").hidden=false;renderQ();
+});
+function renderQ(){
+  var q=t.list[t.i];
+  $("t-prog").textContent="Pregunta "+(t.i+1)+" de "+t.list.length;
+  $("t-tag").textContent=TEMAS[q[4]];
+  $("t-pts").textContent=t.ok+" aciertos";
+  $("t-q").textContent=q[0];
+  $("t-exp").hidden=true;$("t-next").hidden=true;
+  var order=shuffle([0,1,2,3]);
+  $("t-opts").innerHTML=order.map(function(o,k){return '<button class="opt" data-o="'+o+'"><span class="k">'+"ABCD"[k]+'</span><span>'+esc(q[1][o])+'</span></button>';}).join("");
+  [].slice.call($("t-opts").children).forEach(function(b){b.addEventListener("click",function(){answer(+b.dataset.o);});});
+}
+function answer(o){
+  var q=t.list[t.i],right=o===q[2];
+  if(right)t.ok++;else t.fallos.push({q:q,dada:q[1][o]});
+  [].slice.call($("t-opts").children).forEach(function(b){b.disabled=true;var v=+b.dataset.o;if(v===q[2])b.classList.add("right");else if(v===o)b.classList.add("wrong");});
+  $("t-exp").innerHTML="<b>"+(right?"Correcto.":"No. Era: "+esc(q[1][q[2]])+".")+"</b> "+esc(q[3]);
+  $("t-exp").hidden=false;$("t-pts").textContent=t.ok+" aciertos";
+  $("t-next").textContent=t.i+1<t.list.length?"Siguiente":"Ver resultado";$("t-next").hidden=false;$("t-next").focus();
+}
+$("t-next").addEventListener("click",function(){t.i++;if(t.i<t.list.length)renderQ();else endTest();});
+function endTest(){
+  var pct=Math.round(100*t.ok/t.list.length);
+  $("t-run").hidden=true;$("t-end").hidden=false;
+  $("t-score").textContent=pct+" %";
+  $("t-msg").textContent=t.ok+" de "+t.list.length+(pct>=90?". Listo para el examen.":pct>=70?". Bien; repasa los fallos.":". Vuelve al temario de los apartados que fallas.");
+  var b=store("best")||0;if(pct>b)store("best",pct);showBest();
+  $("t-fallos").innerHTML=t.fallos.length?t.fallos.map(function(f){return "<li><strong>"+esc(f.q[0])+"</strong><br>Tu respuesta: "+esc(f.dada)+"<br><span class='ok'>Correcta: "+esc(f.q[1][f.q[2]])+"</span><br><span class='fuente'>"+esc(TEMAS[f.q[4]])+"</span></li>";}).join(""):"<li>Ningún fallo.</li>";
+}
+$("t-again").addEventListener("click",function(){$("t-end").hidden=true;$("t-start").hidden=false;});
+
+/* ---------- Cronología ---------- */
+// [texto, fecha visible, clave de orden, ¿tiene mes?]
+var EV=[
+["Empieza el reinado de Luis XIV, el Rey Sol","1643",1643,0],
+["Habeas Corpus en Inglaterra","1679",1679,0],
+["Bill of Rights en Inglaterra","1689",1689,0],
+["Empieza a publicarse la Enciclopedia","1751",1751,0],
+["Rousseau publica El contrato social","1762",1762,0],
+["Luis XVI no puede pagar los préstamos de los banqueros","1788",1788,0],
+["Reunión de los Estados Generales","5 mayo 1789",1789.34,1],
+["Toma de la Bastilla","14 julio 1789",1789.53,1],
+["Decreto que abole los privilegios y derechos señoriales","4 agosto 1789",1789.59,1],
+["Declaración de Derechos del Hombre y del Ciudadano","26 agosto 1789",1789.65,1],
+["Huida del rey y detención en Varennes","junio 1791",1791.45,1],
+["Francia declara la guerra a Austria y Prusia","abril 1792",1792.28,1],
+["Asalto al palacio de las Tullerías","agosto 1792",1792.6,1],
+["La Convención proclama la república","septiembre 1792",1792.7,1],
+["Ejecución de Luis XVI","21 enero 1793",1793.05,1],
+["Los jacobinos toman el poder","junio 1793",1793.45,1],
+["Ejecución de María Antonieta","16 octubre 1793",1793.79,1],
+["Reacción termidoriana","1794",1794,0],
+["Se forma el Directorio","1795",1795,0],
+["Golpe de Brumario de Napoleón","1799",1799,0],
+["Concordato con la Iglesia","1801",1801,0],
+["Napoleón se corona emperador","1804",1804,0],
+["Código de Comercio","1807",1807,0],
+["Invasión de España; José Bonaparte rey","1808",1808,0],
+["Código Penal","1810",1810,0],
+["Máxima extensión del Imperio","1812",1812,0],
+["La coalición ocupa París","1814",1814,0],
+["Batalla de Waterloo","1815",1815,0],
+["Muere Napoleón en Santa Elena","1821",1821,0]
+];
+var cronoReady=false,c={set:[],picked:[]};
+function conflict(a,b){return Math.floor(a[2])===Math.floor(b[2])&&!(a[3]&&b[3]);}
+function newRound(){
+  var pool=shuffle(EV),set=[];
+  for(var i=0;i<pool.length&&set.length<7;i++){if(set.every(function(s){return !conflict(s,pool[i]);}))set.push(pool[i]);}
+  c.set=set;c.picked=[];$("c-res").textContent="";renderCrono(false);
+}
+function renderCrono(checked){
+  $("c-list").innerHTML=c.set.map(function(e,idx){
+    var p=c.picked.indexOf(idx),cls="ev"+(p>=0?" picked":"");
+    if(checked){var sorted=c.set.slice().sort(function(a,b){return a[2]-b[2];});cls+=sorted[p]===e?" good":" bad";}
+    return '<button class="'+cls+'" data-i="'+idx+'"'+(checked?" disabled":"")+'><span class="pos">'+(p>=0?p+1:"")+'</span><span>'+esc(e[0])+'</span><span class="date">'+(checked?esc(e[1]):"")+'</span></button>';
+  }).join("");
+  [].slice.call($("c-list").children).forEach(function(b){b.addEventListener("click",function(){
+    var i=+b.dataset.i,p=c.picked.indexOf(i);
+    if(p>=0)c.picked.splice(p,1);else c.picked.push(i);
+    renderCrono(false);
+  });});
+  $("c-check").disabled=checked||c.picked.length!==c.set.length;
+}
+$("c-new").addEventListener("click",newRound);
+$("c-check").addEventListener("click",function(){
+  var sorted=c.set.slice().sort(function(a,b){return a[2]-b[2];});
+  var good=c.picked.filter(function(idx,p){return sorted[p]===c.set[idx];}).length;
+  renderCrono(true);
+  $("c-res").textContent=good+" de "+c.set.length+" en su sitio. "+(good===c.set.length?"Perfecto.":"Fíjate en las fechas que aparecen ahora.");
+});
+
+/* ---------- Personajes ---------- */
+var PERS={
+"Luis XIV":["Prototipo de monarca absoluto; le llamaban el Rey Sol.","Reinó en Francia de 1643 a 1715 asesorado por un Consejo de Estado."],
+"Luis XVI":["Convocó los Estados Generales el 5 de mayo de 1789.","Intentó huir en junio de 1791 y fue detenido en Varennes.","Fue guillotinado el 21 de enero de 1793."],
+"María Antonieta":["Reina encarcelada tras el asalto a las Tullerías y guillotinada el 16 de octubre de 1793."],
+"Locke":["Filósofo inglés: el Estado solo es legítimo si respeta la vida, la libertad y la propiedad.","Su obra y el parlamentarismo inglés influyeron en los ilustrados franceses."],
+"Voltaire":["Muy crítico con la religión, los privilegios y el absolutismo; quería que los impuestos no los pagase solo el Tercer Estado."],
+"Montesquieu":["Propuso dividir el poder en legislativo, ejecutivo y judicial."],
+"Rousseau":["Escribió El contrato social (1762) y planteó la soberanía nacional."],
+"Diderot y D'Alembert":["Dirigieron la Enciclopedia, publicada entre 1751 y 1772."],
+"Edward Jenner":["Descubrió la vacuna contra la viruela."],
+"James Cook":["Exploró las costas orientales de Australia en sus expediciones por el Pacífico."],
+"Carlos III":["Rey de España, ejemplo de déspota ilustrado junto a Catalina de Rusia y Federico II."],
+"Robespierre":["Principal figura del Comité de Salvación Pública durante el Terror."],
+"Napoleón Bonaparte":["General que dio el golpe de Brumario en 1799.","Primer cónsul y después emperador desde 1804.","Derrotado en Waterloo en 1815; murió en Santa Elena en 1821.","Creó los prefectos, los liceos y el Código Civil."],
+"José Bonaparte":["Hermano de Napoleón, nombrado rey de España tras la invasión de 1808."],
+"Madame de Geoffrin":["Organizaba en su salón veladas con grandes personajes ilustrados."],
+"Marqués de Launay":["Gobernador de la Bastilla cuando se produjo la toma; fue detenido y ejecutado."]
+};
+var persReady=false,pq=[],pi=0,pok=0;
+function buildPers(){pq=[];Object.keys(PERS).forEach(function(n){PERS[n].forEach(function(d){pq.push([n,d]);});});pq=shuffle(pq);pi=0;pok=0;}
+function nextPers(){
+  if(!pq.length||pi>=pq.length)buildPers();
+  var cur=pq[pi],names=Object.keys(PERS).filter(function(n){return n!==cur[0];});
+  var opts=shuffle([cur[0]].concat(shuffle(names).slice(0,3)));
+  $("p-prog").textContent="Pista "+(pi+1)+" de "+pq.length;
+  $("p-pts").textContent=pok+" aciertos";
+  $("p-q").textContent=cur[1];
+  $("p-exp").hidden=true;$("p-next").hidden=true;
+  $("p-opts").innerHTML=opts.map(function(n,k){return '<button class="opt" data-n="'+esc(n)+'"><span class="k">'+"ABCD"[k]+'</span><span>'+esc(n)+'</span></button>';}).join("");
+  [].slice.call($("p-opts").children).forEach(function(b){b.addEventListener("click",function(){
+    var right=b.dataset.n===cur[0];if(right)pok++;
+    [].slice.call($("p-opts").children).forEach(function(x){x.disabled=true;if(x.dataset.n===cur[0])x.classList.add("right");else if(x===b)x.classList.add("wrong");});
+    $("p-exp").innerHTML="<b>"+(right?"Correcto.":"Era "+esc(cur[0])+".")+"</b>";$("p-exp").hidden=false;
+    $("p-pts").textContent=pok+" aciertos";$("p-next").hidden=false;$("p-next").focus();
+  });});
+}
+$("p-next").addEventListener("click",function(){pi++;nextPers();});
+
+/* ---------- Preguntas largas ---------- */
+var DEV=[
+["Explica las características del Antiguo Régimen: economía, sociedad y política.",
+ ["Economía agraria de subsistencia: técnicas tradicionales, bajos rendimientos, autoconsumo","Rotación trienal con barbecho","Crisis de subsistencia y su cadena de causas","Sociedad estamental por nacimiento: privilegiados y no privilegiados","Privilegios de nobleza y clero (sin impuestos, diezmo, tribunales propios)","Monarquía absoluta de derecho divino: el rey concentra los tres poderes"],
+ "El Antiguo Régimen fue el sistema de la Europa de la Edad Moderna. Su economía era agraria y de subsistencia: se usaban técnicas tradicionales con rendimientos bajos, se producía para el autoconsumo y había pocos intercambios. Se cultivaba con la rotación trienal con barbecho. Los años de mal tiempo traían malas cosechas, subía el precio del trigo y llegaban el hambre, las epidemias y las revueltas (crisis de subsistencia).\nLa sociedad era estamental: se dividía por nacimiento, no por riqueza. Los privilegiados (nobleza y clero) no pagaban impuestos y tenían leyes y tribunales propios; la Iglesia cobraba el diezmo. Los no privilegiados (Tercer Estado: campesinos, artesanos, comerciantes, burgueses) eran la mayoría y no tenían derechos; los campesinos pagaban rentas y derechos señoriales.\nEn política gobernaba la monarquía absoluta de derecho divino: el rey recibía su poder de Dios, concentraba el poder legislativo, ejecutivo y judicial y no tenía ningún control. Los habitantes eran súbditos. El ejemplo fue Luis XIV."],
+["¿Por qué creció el poder de la burguesía en el siglo XVIII y por qué era un problema para la sociedad estamental?",
+ ["Crecimiento de la población (sin pandemias ni guerras, alta natalidad)","Más producción: tierras yermas, patata y maíz, trabajo a domicilio y manufacturas","Comercio colonial y triangular: grandes beneficios","La riqueza de nobles y clérigos dependía de la tierra","La burguesía seguía siendo Estado llano: sin igualdad ante la ley"],
+ "En el siglo XVIII la población europea creció porque no hubo grandes pandemias ni guerras y la natalidad era alta. Hacían falta más alimentos y productos: se roturaron tierras yermas, se cultivaron patatas y maíz y la industria aumentó su oferta con el trabajo a domicilio y las manufacturas. Además, el comercio con las colonias y el comercio triangular de esclavos dieron grandes beneficios a comerciantes y accionistas.\nTodo ello enriqueció a la burguesía (comerciantes, banqueros…) frente a nobles y clérigos, cuya riqueza dependía de la tierra. El problema era que la burguesía seguía formando parte del Estado llano: tenía dinero e influencia, pero no privilegios ni poder político. Esa desigualdad ante la ley era cada vez más incoherente, y por eso la burguesía acabará reclamando cambios."],
+["Explica las propuestas de los principales pensadores ilustrados.",
+ ["Razón y observación frente a tradición y superstición","Locke: pacto, derechos naturales, parlamento","Voltaire: crítica, parlamento limita al rey, impuestos","Montesquieu: división de poderes","Rousseau: contrato social y soberanía nacional","Igualdad ante la ley, movilidad social y mérito","Fisiocracia y liberalismo económico"],
+ "La Ilustración defendía la razón y la observación para entender el mundo, en lugar de la tradición, la religión o la superstición, y confiaba en la ciencia, el progreso y la educación.\nLocke dijo que el Estado nace de un pacto entre gobernantes e individuos y solo es legítimo si respeta los derechos naturales (vida, libertad y propiedad) y si hay un parlamento elegido. Voltaire criticó la intolerancia religiosa, los privilegios y el absolutismo, y quería que el parlamento limitase al rey y que los impuestos no los pagase solo el Tercer Estado. Montesquieu propuso dividir el poder en legislativo (parlamento), ejecutivo (rey y ministros) y judicial (jueces independientes). Rousseau defendió el contrato social y la soberanía nacional: el poder sale de los ciudadanos y se expresa con el voto.\nContra la sociedad estamental pedían igualdad ante la ley, movilidad social y mérito personal. En economía, frente al mercantilismo, la fisiocracia consideraba la agricultura la principal riqueza, y defendían la libertad económica, la propiedad privada y que el Estado no interviniese (liberalismo económico)."],
+["Compara el absolutismo, el Despotismo Ilustrado y el parlamentarismo.",
+ ["Absolutismo: derecho divino, tres poderes en el rey, súbditos","Luis XIV como ejemplo","Despotismo: reformas ilustradas sin renunciar al poder; lema","Catalina de Rusia, Federico II, Carlos III","Choque con privilegios → revoluciones liberales","Parlamentarismo: Inglaterra y Países Bajos, separación de poderes, parlamento elegido, derechos","Habeas Corpus 1679 y Bill of Rights 1689"],
+ "En la monarquía absoluta, el rey tiene el poder por derecho divino, concentra los tres poderes, no tiene control y sus súbditos no tienen derechos. Su prototipo fue Luis XIV, el Rey Sol.\nEl Despotismo Ilustrado, desde mediados del siglo XVIII (Catalina de Rusia, Federico II de Prusia, Carlos III de España), mantenía el poder absoluto pero hacía reformas inspiradas en la Ilustración: agricultura, comercio, manufacturas, administración, ciencia y educación. Su lema era «Todo para el pueblo, pero sin el pueblo». Sus reformas chocaron con los privilegios, y esa dificultad de reformar desde arriba abrió paso a las revoluciones liberales.\nEl parlamentarismo surgió en Inglaterra y los Países Bajos tras sus revoluciones del siglo XVII, impulsado por la burguesía. Se basa en la separación de poderes y en un parlamento elegido por propietarios y aristócratas que hace las leyes y controla al gobierno; el Estado respeta los derechos del ciudadano. En Inglaterra, el Habeas Corpus (1679) garantizaba las libertades individuales y el Bill of Rights (1689) limitaba al rey."],
+["¿Cuáles fueron las causas de la Revolución francesa? Distingue entre causas profundas e inmediatas.",
+ ["Profunda: malestar de los campesinos (impuestos, rentas, malas cosechas)","Profunda: malestar urbano (artesanos, burguesía limitada)","Profunda: ideas ilustradas y ejemplo americano; reivindicaciones económicas y políticas","95 % frente a 5 % de privilegiados","Inmediata: deuda; en 1788 no puede pagar los préstamos","Inmediata: Estados Generales y rechazo a las peticiones del Tercer Estado"],
+ "Las causas profundas se fueron gestando durante el siglo XVIII. La mayoría de la población eran campesinos que cultivaban tierras ajenas y pagaban impuestos y rentas al rey, a los nobles y a la Iglesia; con las malas cosechas no podían subsistir. En las ciudades, artesanos y trabajadores pasaban dificultades y la burguesía veía limitados sus negocios. La burguesía, con las ideas ilustradas y el ejemplo de la Revolución americana, pedía cambios económicos (propiedad, libertad para producir y comerciar) y políticos (libertad, igualdad ante la ley y soberanía nacional). El Tercer Estado era el 95 % de la población, frente a un 5 % de privilegiados que no pagaban impuestos y se oponían a cualquier cambio.\nLas causas inmediatas vinieron de la crisis económica. El rey necesitaba dinero y en 1788 no podía pagar ni los intereses de los préstamos. La única salida era que los privilegiados pagasen impuestos, así que Luis XVI convocó los Estados Generales el 5 de mayo de 1789. Allí el Tercer Estado pidió suprimir los derechos señoriales y la soberanía nacional, pero nobles y clero lo rechazaron, y la crisis económica se convirtió en un conflicto político."],
+["Explica cómo empezó la Revolución en 1789, desde los Estados Generales hasta la toma de la Bastilla.",
+ ["Estados Generales: 5 de mayo de 1789, reforma fiscal","Voto por estamento: los privilegiados ganan 2 a 1","Asamblea Nacional y voto por persona","Juramento del Juego de Pelota: hasta aprobar una Constitución","Amenaza del ejército y toma de la Bastilla (14 de julio)","Revueltas en ciudades y en el campo"],
+ "Luis XVI convocó los Estados Generales el 5 de mayo de 1789 para aprobar una reforma fiscal. Como se votaba por estamento, el clero y la nobleza sumaban dos votos frente a uno y siempre imponían su voluntad. Por eso los representantes del Tercer Estado abandonaron la reunión, se constituyeron en Asamblea Nacional, como representantes de toda la nación, y aprobaron el voto por persona.\nReunidos en la sala del Juego de Pelota de Versalles, juraron seguir reunidos hasta aprobar una Constitución. Los privilegiados amenazaron con usar el ejército, y entonces intervino el pueblo de París: el 14 de julio de 1789 asaltó la Bastilla, símbolo del absolutismo, y se hizo con sus armas. Esto demostró que la monarquía no era invulnerable al pueblo. Hubo hechos parecidos en otras ciudades, y en el campo los campesinos atacaron castillos y propiedades de los señores. La Revolución rompía con el Antiguo Régimen."],
+["¿Qué medidas tomó la Asamblea Nacional y qué estableció la Constitución de 1791?",
+ ["Decreto del 4 de agosto: fin de privilegios y derechos señoriales","Declaración de Derechos (26 de agosto), excluía a mujeres y esclavos","Separación de poderes con veto del rey","Igualdad ante la ley y soberanía nacional","Sufragio censitario (hombres mayores de 25 que pagan)","Fin de los gremios, libertad económica, igualdad fiscal","Constitución civil del clero, venta de bienes de la Iglesia, Guardia Nacional"],
+ "La Asamblea Nacional se consideraba representante de una nación sin privilegios en la que todos eran ciudadanos. El decreto del 4 de agosto de 1789 abolió los privilegios y los derechos señoriales de la nobleza y el clero. El 26 de agosto aprobó la Declaración de Derechos del Hombre y del Ciudadano, con derechos y libertades para los ciudadanos, aunque excluía a las mujeres y a los esclavos.\nLa Asamblea Constituyente elaboró la Constitución de 1791. Organizaba el Estado con separación de poderes, aunque el rey conservaba el ejecutivo y el derecho a vetar las leyes. Reconocía la igualdad ante la ley, los derechos y libertades y la soberanía de la nación, pero con sufragio censitario: solo votaban los hombres de más de 25 años que pagaban una contribución. Nacía así una monarquía constitucional y se eligió la Asamblea Legislativa.\nAdemás se abolieron los gremios, se implantó la libertad económica y la igualdad ante los impuestos, la Iglesia tuvo que jurar la Constitución civil del clero y sus bienes se vendieron para reducir la deuda, y se creó la Guardia Nacional para defender la Revolución."],
+["¿Por qué fracasó la monarquía constitucional?",
+ ["No la aceptaron la familia real, los privilegiados ni la Iglesia","Conspiraciones y nobles emigrados que buscan apoyo en Austria y Prusia","Huida a Varennes (junio de 1791): el rey, traidor","Guerra contra Austria y Prusia (abril de 1792)","Austriacos a las puertas de París (julio de 1792)","Asalto a las Tullerías (agosto de 1792)"],
+ "La monarquía constitucional no la aceptaron la familia real, que no admitía que le impusieran leyes, ni la mayoría de los antiguos privilegiados, que no querían perder sus privilegios, ni la Iglesia, que no aceptaba someterse a la Constitución. Todos ellos conspiraron, y muchos nobles emigraron para buscar ayuda de las monarquías absolutas, sobre todo Austria y Prusia.\nEn junio de 1791 Luis XVI intentó huir para encabezar la contrarrevolución, pero lo detuvieron en Varennes y desde entonces fue visto como un traidor. Como la amenaza absolutista crecía, en abril de 1792 la Asamblea declaró la guerra a Austria y Prusia, y en julio el ejército austriaco llegó a las puertas de París. La traición del rey y la invasión provocaron la insurrección de los sans-culottes, que en agosto de 1792 asaltaron las Tullerías y encarcelaron a los reyes: la monarquía quedó invalidada."],
+["¿Qué cambió con la república? Explica la Convención girondina y jacobina.",
+ ["Sufragio universal masculino y Convención (septiembre de 1792)","Proclamación de la república y victoria de Valmy","Girondinos moderados y jacobinos radicales","Juicio y ejecución de los reyes (1793) y sus consecuencias","Jacobinos al poder (junio de 1793), Comité de Salvación Pública, Robespierre","Leva en masa, Constitución de 1793, derechos sociales y reformas","El Terror y la Ley de sospechosos"],
+ "Tras el asalto a las Tullerías se convocaron elecciones por sufragio universal masculino, y en septiembre de 1792 la Convención Nacional proclamó la república, abolió la monarquía y venció a austriacos y prusianos en Valmy. En ella había dos grupos: los girondinos, republicanos moderados que formaron el primer gobierno, y los jacobinos, radicales ligados a los sans-culottes.\nLa Convención juzgó a los reyes por conspiración y los guillotinó en 1793. Esto dividió a los revolucionarios y provocó revueltas contrarrevolucionarias dentro y la alianza de Gran Bretaña, Holanda y España con Prusia y Austria fuera.\nEn junio de 1793 los jacobinos, con parte de la burguesía y los sans-culottes, tomaron el poder y gobernaron de forma dictatorial con el Comité de Salvación Pública y Robespierre. Con la leva en masa frenaron la amenaza exterior. Aprobaron la Constitución y la Declaración de Derechos de 1793, que reconocían derechos sociales, y reformas como la enseñanza obligatoria, el reparto de tierras, el precio máximo y el salario mínimo. Pero suspendieron derechos y libertades: con el Terror, los tribunales revolucionarios castigaban con cárcel o guillotina a los sospechosos de oponerse a la Convención."],
+["Compara los golpes de Estado de 1794 y 1799: causas, semejanzas y diferencias.",
+ ["1794: reacción termidoriana de los republicanos moderados","Causa 1794: rechazo de la burguesía a las leyes sociales y al Terror","Consecuencia: Directorio (1795), 5 miembros, liberalismo económico","1799: golpe de Brumario de Napoleón","Causa 1799: Directorio ineficaz, inestabilidad, se busca orden con el ejército","Semejanza: los dos los apoya la burguesía moderada contra la radicalización","Diferencia: 1799 cierra la Revolución y lleva a una dictadura personalista"],
+ "En 1794, los republicanos moderados dieron un golpe contra los jacobinos, la reacción termidoriana. La burguesía rechazaba las leyes sociales y el Terror, y aunque había victorias militares y mejoras para las clases populares, la Convención jacobina no se consolidó. En 1795 se formó el Directorio, de cinco miembros, que reforzó el liberalismo económico y una sociedad burguesa, pero sufrió mucha inestabilidad: la conjura de los iguales, los neojacobinos que pedían el sufragio universal y la Constitución de 1793, y los monárquicos.\nEn 1799, parte de la burguesía consideró ineficaz al Directorio y pensó que el ejército garantizaría el orden y la estabilidad. El general Napoleón dio el golpe de Brumario.\nLos dos golpes se parecen en que los apoya la burguesía moderada para frenar la radicalización y defender el liberalismo moderado. Se diferencian en que el de 1794 mantuvo la república con un gobierno colectivo, mientras que el de 1799 lo dio un militar, cerró la Revolución y llevó a una dictadura personalista."],
+["Explica las reformas de Napoleón. ¿En qué medida son herencia de la Revolución?",
+ ["Se veía heredero de 1789-1791","Consulado: Constitución sin derechos, ejecutivo fuerte, censura, primer cónsul","Prefectos y liceos","Concordato de 1801","Códigos Civil 1804, Comercio 1807, Penal 1810","Herencia: igualdad ante la ley, propiedad, libertad individual, acceso a cargos","No herencia: libertades limitadas, mujer sometida al marido"],
+ "Napoleón se consideraba heredero de los cambios de 1789-1791 y quería que Francia fuera la primera potencia europea. Durante el Consulado (1799-1804) aprobó una Constitución sin declaración de derechos, que daba mucho poder al ejecutivo, limitó las libertades e impuso la censura. Como primer cónsul, promulgaba leyes y nombraba y destituía a gobierno, ejército y administración: una dictadura personalista.\nReorganizó Francia: creó los prefectos, representantes del Estado en los departamentos; fundó los liceos para formar funcionarios; firmó el Concordato de 1801 con la Iglesia, con tolerancia religiosa; y promulgó el Código Civil (1804), el de Comercio (1807) y el Penal (1810).\nEn parte son herencia de la Revolución, porque los códigos confirmaban la igualdad ante la ley, el derecho de propiedad, la libertad individual y el libre acceso a los cargos públicos. Pero no lo son en otros aspectos: las libertades estaban muy limitadas, no había declaración de derechos y el Código Civil sometía a la mujer al marido."],
+["Explica el auge y la caída del Imperio napoleónico.",
+ ["1804: coronación como emperador por el Papa","Conquista de Europa: territorios anexionados y otros para su familia","España 1808: José Bonaparte","Regímenes constitucionales: primero simpatía, después rechazo al invasor","Independencia nacional","1812 máxima extensión; Rusia, España y coalición británica","París 1814, Waterloo 1815, Santa Elena 1821"],
+ "En 1804 Napoleón se hizo coronar emperador por el Papa y empezó a conquistar Europa con un gran ejército y métodos militares nuevos, para crear un imperio con Francia en el centro. Algunos territorios los anexionó y otros los gobernaron miembros de su familia, como España, invadida en 1808, con su hermano José Bonaparte como rey.\nEn los territorios ocupados suprimió el absolutismo e implantó regímenes constitucionales, lo que al principio despertó simpatía entre reformistas y liberales. Pero los franceses eran invasores que usaban la violencia y explotaban a la población, y eso activó los deseos de independencia nacional.\nEn 1812 el Imperio llegó a su máxima extensión, pero empezó a decaer porque no pudo ocupar Rusia, tenía problemas en España y se formó una coalición dirigida por Gran Bretaña, que ocupó París en 1814. Napoleón fue derrotado definitivamente en Waterloo en 1815 y confinado en la isla de Santa Elena, donde murió en 1821."]
+];
+var dChecks=store("checks")||{};
+$("d-list").innerHTML=DEV.map(function(d,i){
+  return '<article class="dev"><div class="q">'+esc(d[0])+'</div>'+
+  '<ul class="checks">'+d[1].map(function(p,j){var id="d"+i+"-"+j;return '<li><label for="'+id+'"><input type="checkbox" id="'+id+'"'+(dChecks[id]?" checked":"")+'><span>'+esc(p)+'</span></label></li>';}).join("")+'</ul>'+
+  '<div class="row"><button class="btn" data-show="'+i+'">Ver respuesta modelo</button><span class="fuente" id="d-c'+i+'"></span></div>'+
+  '<div class="modelo" id="d-m'+i+'" hidden>'+d[2].split("\n").map(function(p){return "<p>"+esc(p)+"</p>";}).join("")+'</div></article>';
+}).join("");
+function countDev(i){var n=DEV[i][1].length,k=0;for(var j=0;j<n;j++)if(dChecks["d"+i+"-"+j])k++;$("d-c"+i).textContent=k+" de "+n+" puntos";}
+DEV.forEach(function(_,i){countDev(i);});
+$("d-list").addEventListener("change",function(e){if(e.target.type!=="checkbox")return;dChecks[e.target.id]=e.target.checked;store("checks",dChecks);countDev(+e.target.id.split("-")[0].slice(1));});
+$("d-list").addEventListener("click",function(e){var b=e.target.closest("[data-show]");if(!b)return;var m=$("d-m"+b.dataset.show);m.hidden=!m.hidden;b.textContent=m.hidden?"Ver respuesta modelo":"Ocultar respuesta";});
+
+/* ---------- Arranque ---------- */
+var h=(location.hash||"").replace("#","");
+show(h||store("tab")||"temario");
+})();
+</script>
+</body>
+</html>
