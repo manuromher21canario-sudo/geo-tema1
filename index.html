@@ -152,6 +152,43 @@ th{background:var(--paper);font-weight:600}
 .tarea ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
 .blank{background:var(--bleu-soft);color:var(--bleu);font-weight:600;border-radius:4px;padding:0 5px}
 .copy{font-size:.85rem}
+
+/* Examen */
+.exbar{position:sticky;top:calc(env(safe-area-inset-top,0px) + 50px);z-index:8;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.exbar .mono{font-size:1.1rem}
+.exsec{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:grid;gap:14px}
+.exsec h3 .pts{font-family:var(--mono);font-size:.85rem;font-weight:400;color:var(--muted);margin-left:6px}
+.exq{display:grid;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
+.exq:first-of-type{border-top:0;padding-top:0}
+.exq .enun{font-weight:600}
+.exq label.ch{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;padding:6px 8px;border-radius:6px;cursor:pointer}
+.exq label.ch input{margin-top:5px;accent-color:var(--bleu)}
+.exq label.ch.right{background:var(--ok-soft)}
+.exq label.ch.wrong{background:var(--rouge-soft)}
+.vfrow{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.vfrow:first-of-type{border-top:0}
+.vfbtns{display:flex;gap:6px}
+.vfbtns label{border:1px solid var(--line);border-radius:6px;padding:4px 12px;cursor:pointer;font-weight:600}
+.vfbtns input{position:absolute;opacity:0;pointer-events:none}
+.vfbtns label:has(input:checked){background:var(--bleu);border-color:var(--bleu);color:var(--card)}
+.vfbtns label:has(input:focus-visible){outline:3px solid var(--bleu);outline-offset:2px}
+.fix{grid-column:1/-1;font-size:.9rem;border-radius:6px;padding:8px 10px}
+.fix.ok{background:var(--ok-soft)}.fix.ko{background:var(--rouge-soft)}
+.hueco-txt{line-height:2.3}
+.hueco{font:inherit;color:var(--ink);background:var(--paper);border:0;border-bottom:2px solid var(--bleu);border-radius:4px 4px 0 0;padding:2px 6px;width:11em;max-width:100%}
+.hueco.right{border-bottom-color:var(--ok);background:var(--ok-soft)}
+.hueco.wrong{border-bottom-color:var(--rouge);background:var(--rouge-soft)}
+.sol{color:var(--ok);font-weight:600;font-size:.9rem;margin:0 4px}
+.crow{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:6px 0}
+.crow select{width:4.5em}
+.crow.right{color:var(--ok)}.crow.wrong{color:var(--rouge)}
+textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 12px;width:100%;min-height:8em;resize:vertical}
+.selfmark{display:flex;flex-wrap:wrap;gap:6px}
+.selfmark label{border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer;font-size:.9rem}
+.selfmark input{position:absolute;opacity:0;pointer-events:none}
+.selfmark label:has(input:checked){background:var(--bleu);border-color:var(--bleu);color:var(--card)}
+.nota{font-family:var(--display);font-size:clamp(3rem,10vw,4.5rem);font-weight:700;line-height:1;color:var(--bleu)}
+.nota.susp{color:var(--rouge)}
 </style>
 
 </head>
@@ -176,6 +213,7 @@ th{background:var(--paper);font-weight:600}
     <button class="tab" role="tab" data-tab="cronologia" aria-selected="false">Cronología</button>
     <button class="tab" role="tab" data-tab="personajes" aria-selected="false">Personajes</button>
     <button class="tab" role="tab" data-tab="desarrollo" aria-selected="false">Preguntas largas</button>
+    <button class="tab" role="tab" data-tab="examen" aria-selected="false">Examen</button>
     <button class="tab" role="tab" data-tab="tarea" aria-selected="false">Tarea</button>
   </div>
 </nav>
@@ -520,6 +558,34 @@ th{background:var(--paper);font-weight:600}
 <section class="view" id="v-desarrollo" hidden>
   <p class="lead">Las preguntas largas que pueden caer. Contesta primero en un papel o en voz alta. Después marca los puntos que has dicho y compara con la respuesta modelo. Si te faltan puntos, vuelve al temario.</p>
   <div id="d-list" style="display:grid;gap:16px"></div>
+</section>
+
+<!-- ============ EXAMEN ============ -->
+<section class="view" id="v-examen" hidden>
+  <div id="e-start" class="panel" style="display:grid;gap:14px">
+    <h3>Examen de prueba</h3>
+    <p class="lead">Un examen completo sobre 10, como el de verdad. Cada vez salen preguntas distintas. Hazlo sin mirar los apuntes y con el cronómetro en marcha (calcula unos 50 minutos). Al entregar, se corrigen solas las partes 1 a 4; las definiciones y la pregunta larga las corriges tú con la respuesta modelo.</p>
+    <div class="tablebox"><table>
+      <tr><th>Parte</th><th>Qué es</th><th>Puntos</th></tr>
+      <tr><td>1</td><td>Test: 10 preguntas</td><td class="mono">3</td></tr>
+      <tr><td>2</td><td>Verdadero o falso: 6 frases</td><td class="mono">1,5</td></tr>
+      <tr><td>3</td><td>Completa el texto: 6 huecos</td><td class="mono">1,5</td></tr>
+      <tr><td>4</td><td>Ordena 5 acontecimientos</td><td class="mono">1</td></tr>
+      <tr><td>5</td><td>Define 2 conceptos</td><td class="mono">1</td></tr>
+      <tr><td>6</td><td>Pregunta larga</td><td class="mono">2</td></tr>
+    </table></div>
+    <div class="row"><button class="btn primary" id="e-go">Empezar examen</button><span class="fuente" id="e-hist"></span></div>
+  </div>
+  <div id="e-run" style="display:grid;gap:16px" hidden>
+    <div class="exbar"><span>Tiempo <span class="mono" id="e-time">00:00</span></span><span class="fuente" id="e-state">Sin entregar</span><button class="btn primary" id="e-send">Entregar</button></div>
+    <div id="e-body" style="display:grid;gap:16px"></div>
+    <div id="e-result" class="panel" style="display:grid;gap:12px" hidden>
+      <div class="row" style="align-items:baseline"><span class="nota" id="e-nota"></span><span id="e-msg"></span></div>
+      <div class="tablebox"><table id="e-desglose"></table></div>
+      <p class="fuente" id="e-pend"></p>
+      <div class="row"><button class="btn primary" id="e-new">Hacer otro examen</button></div>
+    </div>
+  </div>
 </section>
 
 <!-- ============ TAREA ============ -->
@@ -1014,6 +1080,146 @@ function countDev(i){var n=DEV[i][1].length,k=0;for(var j=0;j<n;j++)if(dChecks["
 DEV.forEach(function(_,i){countDev(i);});
 $("d-list").addEventListener("change",function(e){if(e.target.type!=="checkbox")return;dChecks[e.target.id]=e.target.checked;store("checks",dChecks);countDev(+e.target.id.split("-")[0].slice(1));});
 $("d-list").addEventListener("click",function(e){var b=e.target.closest("[data-show]");if(!b)return;var m=$("d-m"+b.dataset.show);m.hidden=!m.hidden;b.textContent=m.hidden?"Ver respuesta modelo":"Ocultar respuesta";});
+
+/* ---------- Examen de prueba ---------- */
+var VF=[
+["La sociedad estamental se dividía según la riqueza de cada persona.",0,"Falso: se dividía por el nacimiento («sangre»), no por motivos económicos."],
+["El diezmo era el 10 % de la cosecha que los campesinos pagaban a la Iglesia.",1,"Verdadero."],
+["Los ricos burgueses formaban parte del estamento privilegiado.",0,"Falso: aunque fueran ricos, eran Estado llano (no privilegiados)."],
+["La Enciclopedia fue dirigida por Voltaire y Rousseau.",0,"Falso: la dirigieron Diderot y D'Alembert."],
+["Montesquieu propuso dividir el poder en legislativo, ejecutivo y judicial.",1,"Verdadero."],
+["La fisiocracia defendía que la riqueza de un país venía del comercio y de los metales preciosos.",0,"Falso: eso es el mercantilismo. La fisiocracia dice que la principal riqueza es la agricultura."],
+["Los déspotas ilustrados renunciaron a su poder absoluto para poder hacer reformas.",0,"Falso: hicieron reformas sin renunciar a su poder absoluto ni a los privilegios."],
+["El Bill of Rights (1689) limitaba los poderes del monarca inglés.",1,"Verdadero."],
+["En los Estados Generales se votaba por persona.",0,"Falso: se votaba por estamento, y por eso los privilegiados ganaban siempre 2 a 1."],
+["El Tercer Estado era aproximadamente el 95 % de la población francesa.",1,"Verdadero."],
+["La Declaración de Derechos de 1789 reconocía los mismos derechos a hombres y mujeres.",0,"Falso: excluía a las mujeres y a los esclavos."],
+["La Constitución de 1791 estableció el sufragio universal masculino.",0,"Falso: estableció el sufragio censitario. El universal masculino llegó en 1792 con la Convención."],
+["Luis XVI fue detenido en Varennes cuando intentaba huir de Francia.",1,"Verdadero (junio de 1791)."],
+["Los girondinos eran los republicanos más radicales de la Convención.",0,"Falso: eran los moderados. Los radicales eran los jacobinos."],
+["Durante el Terror se suspendieron derechos y libertades.",1,"Verdadero."],
+["El Directorio estaba formado por cinco miembros.",1,"Verdadero (desde 1795)."],
+["El golpe de Brumario lo dieron los republicanos moderados en 1794.",0,"Falso: el de 1794 es la reacción termidoriana. El de Brumario lo dio Napoleón en 1799."],
+["El Código Civil de Napoleón daba a la mujer los mismos derechos que al hombre.",0,"Falso: la mujer casada debía obedecer al marido, que administraba sus bienes."],
+["Napoleón fue derrotado definitivamente en la batalla de Waterloo en 1815.",1,"Verdadero."],
+["La primera Constitución de la Francia contemporánea mantenía al rey con el poder ejecutivo y derecho de veto.",1,"Verdadero: la Constitución de 1791."]
+];
+var HUECOS=[
+"Luis XVI convocó los {Estados Generales} el 5 de mayo de 1789. Como se votaba por {estamento}, los privilegiados siempre ganaban. Los representantes del Tercer Estado se constituyeron en {Asamblea Nacional} y en la sala del {Juego de Pelota|Jeu de Paume} juraron seguir reunidos hasta aprobar una {Constitución}. El 14 de julio el pueblo de París asaltó la {Bastilla}.",
+"En junio de 1793 los {jacobinos} tomaron el poder. Gobernó el Comité de {Salvación Pública}, con {Robespierre} como figura principal. Para defender Francia impusieron la leva en {masa}. En 1794 un golpe llamado reacción {termidoriana} acabó con ellos, y en 1795 se creó el {Directorio}, de cinco miembros.",
+"En la monarquía absoluta la autoridad del rey procedía de {Dios}. {Montesquieu} propuso dividir el poder en legislativo, ejecutivo y {judicial}. {Rousseau} defendió el contrato social y la soberanía nacional. Algunos reyes aplicaron el Despotismo {Ilustrado}, cuyo lema era «Todo para el {pueblo}, pero sin el pueblo».",
+"En 1799 Napoleón dio el golpe de {Brumario}. Durante el {Consulado} gobernó como primer cónsul. Firmó con la Iglesia el {Concordato} en 1801 y aprobó el Código {Civil} en 1804. Ese mismo año se coronó {emperador}. Fue derrotado definitivamente en {Waterloo} en 1815.",
+"La economía del Antiguo Régimen era una agricultura de {subsistencia}, con rotación {trienal} con barbecho. La Iglesia cobraba el {diezmo}. Los artesanos seguían las normas de su {gremio}. El comercio entre Europa, África y América se llamaba comercio {triangular}. El comercio enriqueció a la {burguesía}."
+];
+var DEFS=["Sociedad estamental","Tercer Estado (Estado llano)","Crisis de subsistencia","Ilustración","Soberanía nacional","Fisiocracia","Monarquía absoluta","Despotismo Ilustrado","Parlamentarismo","Estados Generales","Asamblea Nacional","Sufragio censitario","Sans-culottes","Jacobinos","El Terror","Reacción termidoriana","Directorio","Consulado","Leva en masa","Constitución civil del clero"];
+var ex=null,exTimer=null;
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/^(el|la|los|las|de|del)\s+/,"").replace(/[^a-z0-9ñ ]/g,"").replace(/\s+/g," ").trim();}
+function fmt(n){return (Math.round(n*100)/100).toString().replace(".",",");}
+function exHist(){var h=store("notas")||[];$("e-hist").textContent=h.length?"Últimas notas: "+h.slice(-5).map(fmt).join(" · "):"";}
+exHist();
+function pickCrono(n){var pool=shuffle(EV),set=[];for(var i=0;i<pool.length&&set.length<n;i++){if(set.every(function(s){return !conflict(s,pool[i]);}))set.push(pool[i]);}return set;}
+function buildExam(){
+  ex={test:shuffle(Q).slice(0,10).map(function(q){return {q:q,ord:shuffle([0,1,2,3])};}),
+      vf:shuffle(VF).slice(0,6),
+      hue:HUECOS[Math.floor(Math.random()*HUECOS.length)],
+      cr:pickCrono(5),
+      def:shuffle(DEFS).slice(0,2).map(function(n){return FICHAS.filter(function(f){return f[0]===n;})[0];}),
+      dev:DEV[Math.floor(Math.random()*DEV.length)],
+      sent:false,t0:Date.now()};
+  var h="";
+  h+='<div class="exsec"><h3>1. Test<span class="pts">3 puntos · 0,3 cada una · los fallos no restan</span></h3>';
+  ex.test.forEach(function(it,i){
+    h+='<div class="exq" id="eq'+i+'"><div class="enun">'+(i+1)+'. '+esc(it.q[0])+'</div>'+it.ord.map(function(o,k){var id="e-t"+i+"-"+o;return '<label class="ch" for="'+id+'" data-o="'+o+'"><input type="radio" name="et'+i+'" id="'+id+'" value="'+o+'"><span>'+"abcd"[k]+') '+esc(it.q[1][o])+'</span></label>';}).join("")+'<div class="fuente" hidden></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="exsec"><h3>2. Verdadero o falso<span class="pts">1,5 puntos · 0,25 cada una</span></h3><div>';
+  ex.vf.forEach(function(v,i){
+    h+='<div class="vfrow" id="ev'+i+'"><span>'+esc(v[0])+'</span><span class="vfbtns"><label for="e-v'+i+'-1"><input type="radio" name="ev'+i+'" id="e-v'+i+'-1" value="1">V</label><label for="e-v'+i+'-0"><input type="radio" name="ev'+i+'" id="e-v'+i+'-0" value="0">F</label></span></div>';
+  });
+  h+='</div></div>';
+  var bi=0;
+  var txt=esc(ex.hue).replace(/\{([^}]+)\}/g,function(){var id="e-h"+(bi++);return '<input class="hueco" id="'+id+'" autocomplete="off" aria-label="Hueco '+bi+'">';});
+  h+='<div class="exsec"><h3>3. Completa el texto<span class="pts">1,5 puntos · 0,25 cada hueco · no cuentan mayúsculas ni tildes</span></h3><p class="hueco-txt">'+txt+'</p></div>';
+  h+='<div class="exsec"><h3>4. Ordena de más antiguo (1) a más reciente (5)<span class="pts">1 punto · 0,2 cada uno</span></h3><div>';
+  ex.cr.forEach(function(e,i){
+    h+='<div class="crow" id="ec'+i+'"><select id="e-c'+i+'" aria-label="Posición"><option value="">–</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select><span>'+esc(e[0])+'</span><span class="date mono"></span></div>';
+  });
+  h+='</div></div>';
+  h+='<div class="exsec"><h3>5. Define estos conceptos<span class="pts">1 punto · 0,5 cada uno</span></h3>';
+  ex.def.forEach(function(f,i){
+    h+='<div class="exq"><label class="enun" for="e-d'+i+'">'+esc(f[0])+'</label><textarea id="e-d'+i+'" style="min-height:5em"></textarea><div id="e-dm'+i+'" hidden></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="exsec"><h3>6. Pregunta larga<span class="pts">2 puntos</span></h3><div class="enun">'+esc(ex.dev[0])+'</div><textarea id="e-dev" style="min-height:14em" aria-label="Respuesta de la pregunta larga"></textarea><div id="e-devm" hidden></div></div>';
+  $("e-body").innerHTML=h;
+  $("e-result").hidden=true;$("e-send").hidden=false;$("e-state").textContent="Sin entregar";
+  clearInterval(exTimer);
+  exTimer=setInterval(function(){var s=Math.floor((Date.now()-ex.t0)/1000);$("e-time").textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");},1000);
+  $("e-time").textContent="00:00";
+}
+function val(name){var c=document.querySelector('input[name="'+name+'"]:checked');return c?+c.value:null;}
+function correctExam(){
+  clearInterval(exTimer);ex.sent=true;
+  var p={test:0,vf:0,hue:0,cr:0};
+  ex.test.forEach(function(it,i){
+    var v=val("et"+i),box=$("eq"+i);
+    if(v===it.q[2])p.test+=0.3;
+    [].slice.call(box.querySelectorAll("label.ch")).forEach(function(l){var o=+l.dataset.o;if(o===it.q[2])l.classList.add("right");else if(o===v)l.classList.add("wrong");});
+    var f=box.querySelector(".fuente");f.textContent=(v===null?"Sin contestar. ":"")+it.q[3];f.hidden=!it.q[3]&&v!==null;
+  });
+  ex.vf.forEach(function(v,i){
+    var a=val("ev"+i),ok=a===v[1];if(ok)p.vf+=0.25;
+    $("ev"+i).insertAdjacentHTML("beforeend",'<div class="fix '+(ok?"ok":"ko")+'">'+(a===null?"Sin contestar. ":ok?"Bien. ":"Mal. ")+esc(v[2])+'</div>');
+  });
+  var ans=[];ex.hue.replace(/\{([^}]+)\}/g,function(_,a){ans.push(a.split("|"));return "";});
+  ans.forEach(function(alts,i){
+    var inp=$("e-h"+i),ok=alts.some(function(a){return norm(a)===norm(inp.value);});
+    if(ok)p.hue+=0.25;inp.classList.add(ok?"right":"wrong");
+    if(!ok)inp.insertAdjacentHTML("afterend",'<span class="sol">→ '+esc(alts[0])+'</span>');
+  });
+  var sorted=ex.cr.slice().sort(function(a,b){return a[2]-b[2];});
+  ex.cr.forEach(function(e,i){
+    var pos=+$("e-c"+i).value,ok=sorted[pos-1]===e;if(ok)p.cr+=0.2;
+    $("ec"+i).classList.add(ok?"right":"wrong");
+    $("ec"+i).querySelector(".date").textContent=e[1]+(ok?"":" · era el "+(sorted.indexOf(e)+1));
+  });
+  ex.def.forEach(function(f,i){
+    var m=$("e-dm"+i);
+    m.innerHTML='<div class="modelo"><p><strong>Modelo:</strong> '+esc(f[1])+'</p></div><p class="fuente">¿Cómo te ha salido? Corrígete tú:</p><div class="selfmark">'+
+      [["0.5","Bien (0,5)"],["0.25","A medias (0,25)"],["0","Mal o en blanco (0)"]].map(function(o,k){var id="e-dmk"+i+"-"+k;return '<label for="'+id+'"><input type="radio" name="edm'+i+'" id="'+id+'" value="'+o[0]+'">'+o[1]+'</label>';}).join("")+'</div>';
+    m.hidden=false;
+  });
+  var dm=$("e-devm");
+  dm.innerHTML='<p class="fuente">Marca los puntos que aparecen en tu respuesta. Cada punto vale lo mismo y entre todos suman 2.</p><ul class="checks">'+ex.dev[1].map(function(pt,j){var id="e-dk"+j;return '<li><label for="'+id+'"><input type="checkbox" id="'+id+'"><span>'+esc(pt)+'</span></label></li>';}).join("")+'</ul><details><summary class="btn" style="display:inline-block">Ver respuesta modelo</summary><div class="modelo" style="margin-top:10px">'+ex.dev[2].split("\n").map(function(t){return "<p>"+esc(t)+"</p>";}).join("")+'</div></details>';
+  dm.hidden=false;
+  [].slice.call($("e-body").querySelectorAll("input:not([name^=edm]):not([id^=e-dk]),select,textarea")).forEach(function(x){x.disabled=true;});
+  ex.auto=p;ex.saved=false;
+  $("e-send").hidden=true;$("e-state").textContent="Entregado";
+  $("e-result").hidden=false;updateNota();
+  $("e-result").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function updateNota(){
+  if(!ex||!ex.sent)return;
+  var p=ex.auto,d=0,dpend=0;
+  ex.def.forEach(function(_,i){var v=document.querySelector('input[name="edm'+i+'"]:checked');if(v)d+=+v.value;else dpend++;});
+  var n=ex.dev[1].length,k=0;for(var j=0;j<n;j++)if($("e-dk"+j).checked)k++;
+  var dev=2*k/n,total=p.test+p.vf+p.hue+p.cr+d+dev;
+  var rows=[["1. Test",p.test,3],["2. Verdadero o falso",p.vf,1.5],["3. Completa el texto",p.hue,1.5],["4. Cronología",p.cr,1],["5. Definiciones",d,1],["6. Pregunta larga",dev,2]];
+  $("e-desglose").innerHTML="<tr><th>Parte</th><th>Nota</th></tr>"+rows.map(function(r){return "<tr><td>"+r[0]+'</td><td class="mono">'+fmt(r[1])+" / "+fmt(r[2])+"</td></tr>";}).join("")+'<tr><th>Total</th><th class="mono">'+fmt(total)+" / 10</th></tr>";
+  $("e-nota").textContent=fmt(total);
+  $("e-nota").classList.toggle("susp",total<5);
+  var flojo=rows.slice().sort(function(a,b){return a[1]/a[2]-b[1]/b[2];})[0][0];
+  $("e-msg").textContent=(total>=9?"Sobresaliente.":total>=7?"Notable.":total>=5?"Aprobado, pero repasa.":"Suspenso: vuelve al temario.")+" Lo más flojo: "+flojo+".";
+  $("e-pend").textContent=dpend?"Te falta corregir "+dpend+" definición(es) en la parte 5 para tener la nota final.":"";
+  if(!dpend&&!ex.saved){var h=store("notas")||[];h.push(Math.round(total*100)/100);store("notas",h.slice(-20));ex.saved=true;exHist();}
+}
+$("e-go").addEventListener("click",function(){buildExam();$("e-start").hidden=true;$("e-run").hidden=false;window.scrollTo({top:0});});
+$("e-send").addEventListener("click",function(){
+  if($("e-send").dataset.confirm!=="1"){$("e-send").dataset.confirm="1";$("e-send").textContent="¿Seguro? Pulsa otra vez";setTimeout(function(){$("e-send").dataset.confirm="";$("e-send").textContent="Entregar";},4000);return;}
+  $("e-send").dataset.confirm="";$("e-send").textContent="Entregar";correctExam();
+});
+$("e-body").addEventListener("change",updateNota);
+$("e-new").addEventListener("click",function(){$("e-run").hidden=true;$("e-start").hidden=false;window.scrollTo({top:0});});
 
 /* ---------- Arranque ---------- */
 var h=(location.hash||"").replace("#","");
