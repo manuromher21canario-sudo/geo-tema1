@@ -152,6 +152,14 @@ th{background:var(--paper);font-weight:600}
 .tarea ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
 .blank{background:var(--bleu-soft);color:var(--bleu);font-weight:600;border-radius:4px;padding:0 5px}
 .copy{font-size:.85rem}
+/* Mapa conceptual en árbol, como el del libro: tema → rama → frase */
+.mapa,.mapa ul{list-style:none;margin:0;padding:0}
+.tarea .mapa{display:grid;gap:14px;padding-left:0}
+.tarea .mapa ul{display:grid;gap:6px;padding-left:22px;margin-left:10px;border-left:2px solid var(--line)}
+.mapa ul>li{position:relative;padding-left:12px}
+.mapa ul>li::before{content:"";position:absolute;left:-22px;top:.8em;width:28px;border-top:2px solid var(--line)}
+.mapa .m1{font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--rouge);display:inline-block;margin-bottom:4px}
+.mapa .m2{font-weight:700;display:inline-block;margin-bottom:4px}
 .enunciado{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-style:italic}
 .enunciado b{font-style:normal;color:var(--rouge)}
 
@@ -598,37 +606,64 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
     <h3>Actividad 72 · pág. 30</h3>
     <p class="enunciado"><b>72.</b> Copia y completa en tu cuaderno este mapa conceptual sobre la crisis del Antiguo Régimen y las revoluciones:</p>
     <p class="fuente">En azul, lo que va en cada hueco.</p>
-    <p><strong>Antiguo Régimen</strong></p>
-    <ul>
-      <li>Economía: basada en la <span class="blank">agricultura</span> de <span class="blank">subsistencia</span>. Uso de la <span class="blank">rotación</span> trienal con barbecho.</li>
-      <li>Sociedad: estamentos <span class="blank">privilegiados</span> (nobleza y <span class="blank">clero</span>); estamento <span class="blank">no privilegiado</span> (<span class="blank">Estado</span> llano o Tercer Estado).</li>
-      <li>Política: Monarquía <span class="blank">absoluta</span>: el rey concentra todos los <span class="blank">poderes</span>. La autoridad del monarca proviene de <span class="blank">Dios</span>.</li>
-    </ul>
-    <p><strong>Transformaciones</strong></p>
-    <ul>
-      <li>Movimiento intelectual: la <span class="blank">Ilustración</span>, cuyos pensadores destacados fueron <span class="blank">Voltaire</span>, <span class="blank">Montesquieu</span> y <span class="blank">Rousseau</span>.</li>
-      <li><span class="blank">Despotismo</span> ilustrado, cuyo lema era "Todo para el pueblo, pero sin el pueblo".</li>
-    </ul>
-    <p><strong>Revolución francesa</strong></p>
-    <ul>
-      <li>Causas a largo plazo: malestar <span class="blank">económico</span> y social de los no privilegiados.</li>
-      <li>Causas inmediatas: rechazo de las ideas del Tercer Estado en los <span class="blank">Estados</span> <span class="blank">Generales</span>.</li>
-      <li>Monarquía constitucional (<span class="blank">1789</span> - <span class="blank">1792</span>).</li>
-      <li><span class="blank">República</span> <span class="blank">social</span> (<span class="blank">1792</span> - <span class="blank">1794</span>).</li>
-      <li>República conservadora o <span class="blank">Directorio</span> (<span class="blank">1794</span> - <span class="blank">1799</span>).</li>
-      <li>Finaliza con: golpe de Estado de <span class="blank">Napoleón</span> (Brumario, 1799).</li>
-    </ul>
-    <p><strong>Restauración · 1815</strong></p>
-    <ul><li>En el <span class="blank">Congreso</span> de <span class="blank">Viena</span> se decidió restaurar el <span class="blank">absolutismo</span>.</li></ul>
-    <p><strong>Revoluciones liberales · oleadas</strong></p>
-    <ul>
-      <li>Revoluciones de <span class="blank">1830</span>.</li>
-      <li>Revoluciones de <span class="blank">1848</span>, conocidas como la <span class="blank">Primavera</span> de los <span class="blank">Pueblos</span>.</li>
-    </ul>
-    <p><strong>Movimientos nacionalistas · nuevos Estados</strong></p>
-    <ul>
-      <li>Independencia de <span class="blank">Grecia</span> y <span class="blank">Bélgica</span>.</li>
-      <li>Unificaciones de <span class="blank">Italia</span> y <span class="blank">Alemania</span>.</li>
+    <p class="fuente">Mismo orden que el del libro: <strong style="color:var(--rouge)">tema</strong> → <strong>rama</strong> → frase con huecos.</p>
+    <ul class="mapa">
+      <li><span class="m1">Antiguo Régimen</span>
+        <ul>
+          <li><span class="m2">economía</span>
+            <ul><li>Basada en la <span class="blank">agricultura</span> de <span class="blank">subsistencia</span>. Uso de la <span class="blank">rotación</span> trienal con barbecho.</li></ul></li>
+          <li><span class="m2">sociedad</span>
+            <ul><li>Estamentos <span class="blank">privilegiados</span> (nobleza y <span class="blank">clero</span>); estamento <span class="blank">no privilegiado</span> (<span class="blank">Estado</span> llano o Tercer Estado).</li></ul></li>
+          <li><span class="m2">política</span>
+            <ul>
+              <li>Monarquía <span class="blank">absoluta</span>: el rey concentra todos los <span class="blank">poderes</span>.</li>
+              <li>La autoridad del monarca proviene de <span class="blank">Dios</span>.</li>
+            </ul></li>
+        </ul></li>
+      <li><span class="m1">Transformaciones</span>
+        <ul>
+          <li><span class="m2">nuevos pensamientos y política</span>
+            <ul>
+              <li>Movimiento intelectual: la <span class="blank">Ilustración</span>, cuyos pensadores destacados fueron <span class="blank">Voltaire</span>, <span class="blank">Montesquieu</span> y <span class="blank">Rousseau</span>.</li>
+              <li><span class="blank">Despotismo</span> ilustrado, cuyo lema era "Todo para el pueblo, pero sin el pueblo".</li>
+            </ul></li>
+        </ul></li>
+      <li><span class="m1">Revolución francesa</span>
+        <ul>
+          <li><span class="m2">causas</span>
+            <ul>
+              <li>Causas a largo plazo: malestar <span class="blank">económico</span> y social de los no privilegiados.</li>
+              <li>Causas inmediatas: rechazo de las ideas del Tercer Estado en los <span class="blank">Estados</span> <span class="blank">Generales</span>.</li>
+            </ul></li>
+          <li><span class="m2">etapas</span>
+            <ul>
+              <li>Monarquía constitucional (<span class="blank">1789</span> - <span class="blank">1792</span>).</li>
+              <li><span class="blank">República</span> <span class="blank">social</span> (<span class="blank">1792</span> - <span class="blank">1794</span>).</li>
+              <li>República conservadora o <span class="blank">Directorio</span> (<span class="blank">1794</span> - <span class="blank">1799</span>).</li>
+              <li>Finaliza con: golpe de Estado de <span class="blank">Napoleón</span> (Brumario, 1799).</li>
+            </ul></li>
+        </ul></li>
+      <li><span class="m1">Restauración</span>
+        <ul>
+          <li><span class="m2">1815</span>
+            <ul><li>En el <span class="blank">Congreso</span> de <span class="blank">Viena</span> se decidió restaurar el <span class="blank">absolutismo</span>.</li></ul></li>
+        </ul></li>
+      <li><span class="m1">Revoluciones liberales</span>
+        <ul>
+          <li><span class="m2">oleadas</span>
+            <ul>
+              <li>Revoluciones de <span class="blank">1830</span>.</li>
+              <li>Revoluciones de <span class="blank">1848</span>, conocidas como la <span class="blank">Primavera</span> de los <span class="blank">Pueblos</span>.</li>
+            </ul></li>
+        </ul></li>
+      <li><span class="m1">Movimientos nacionalistas</span>
+        <ul>
+          <li><span class="m2">nuevos Estados</span>
+            <ul>
+              <li>Independencia de <span class="blank">Grecia</span> y <span class="blank">Bélgica</span>.</li>
+              <li>Unificaciones de <span class="blank">Italia</span> y <span class="blank">Alemania</span>.</li>
+            </ul></li>
+        </ul></li>
     </ul>
     <p class="fuente">El libro marca la república conservadora entre 1794 y 1799, pero el Directorio como tal se formó en 1795, tras el golpe de 1794.</p>
   </div>
