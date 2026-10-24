@@ -197,6 +197,9 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
 .selfmark label{border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer;font-size:.9rem}
 .selfmark input{position:absolute;opacity:0;pointer-events:none}
 .selfmark label:has(input:checked){background:var(--bleu);border-color:var(--bleu);color:var(--card)}
+.guia-just ol{margin:4px 0 8px;padding-left:1.3em;display:grid;gap:2px}
+.guia-just p{margin-top:4px}
+.vfrow textarea{grid-column:1/-1;min-height:3.2em}
 .nota{font-family:var(--display);font-size:clamp(3rem,10vw,4.5rem);font-weight:700;line-height:1;color:var(--bleu)}
 .nota.susp{color:var(--rouge)}
 </style>
@@ -567,6 +570,12 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
 <!-- ============ DESARROLLO ============ -->
 <section class="view" id="v-desarrollo" hidden>
   <p class="lead">Las preguntas largas que pueden caer. Contesta primero en un papel o en voz alta. Después marca los puntos que has dicho y compara con la respuesta modelo. Si te faltan puntos, vuelve al temario.</p>
+  <h3>Preguntas cortas: justifica tu respuesta</h3>
+  <div class="ojo guia-just"><strong>Cómo justificar</strong>
+    <ol><li><strong>Responde</strong> claro: sí, no o «en parte».</li><li><strong>Di el porqué</strong> empezando con <em>porque</em>.</li><li><strong>Añade un dato del libro</strong>: una fecha, un nombre o un ejemplo.</li></ol>
+  </div>
+  <div id="j-list" style="display:grid;gap:12px"></div>
+  <h3>Preguntas largas</h3>
   <div id="d-list" style="display:grid;gap:16px"></div>
 </section>
 
@@ -577,13 +586,23 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
     <p class="lead">Un examen completo sobre 10, como el de verdad. Cada vez salen preguntas distintas. Hazlo sin mirar los apuntes y con el cronómetro en marcha (calcula unos 50 minutos). Al entregar, se corrigen solas las partes 1 a 4; las definiciones y la pregunta larga las corriges tú con la respuesta modelo.</p>
     <div class="tablebox"><table>
       <tr><th>Parte</th><th>Qué es</th><th>Puntos</th></tr>
-      <tr><td>1</td><td>Test: 10 preguntas</td><td class="mono">3</td></tr>
-      <tr><td>2</td><td>Verdadero o falso: 6 frases</td><td class="mono">1,5</td></tr>
+      <tr><td>1</td><td>Test: 10 preguntas</td><td class="mono">2</td></tr>
+      <tr><td>2</td><td>Verdadero o falso, justificando: 6 frases</td><td class="mono">1,5</td></tr>
       <tr><td>3</td><td>Completa el texto: 6 huecos</td><td class="mono">1,5</td></tr>
       <tr><td>4</td><td>Ordena 5 acontecimientos</td><td class="mono">1</td></tr>
       <tr><td>5</td><td>Define 2 conceptos</td><td class="mono">1</td></tr>
-      <tr><td>6</td><td>Pregunta larga</td><td class="mono">2</td></tr>
+      <tr><td>6</td><td>Justifica tu respuesta: 2 preguntas</td><td class="mono">1</td></tr>
+      <tr><td>7</td><td>Pregunta larga</td><td class="mono">2</td></tr>
     </table></div>
+    <div class="ojo guia-just"><strong>Cómo justificar tu respuesta</strong>
+      <ol>
+        <li><strong>Responde</strong> claro: sí, no, verdadero, falso o «en parte».</li>
+        <li><strong>Di el porqué</strong> empezando con <em>porque</em>.</li>
+        <li><strong>Añade un dato del libro</strong>: una fecha, un nombre o un ejemplo.</li>
+      </ol>
+      <p><em>«¿Era democrática la Constitución de 1791?»</em> → <strong>No del todo</strong>, <strong>porque</strong> el sufragio era censitario: <strong>solo votaban los hombres de más de 25 años que pagaban una contribución</strong>.</p>
+      <p>Si solo pones «Falso» o «No», te quedas sin la mitad de la nota.</p>
+    </div>
     <div class="row"><button class="btn primary" id="e-go">Empezar examen</button><span class="fuente" id="e-hist"></span></div>
   </div>
   <div id="e-run" style="display:grid;gap:16px" hidden>
@@ -1100,26 +1119,43 @@ $("d-list").addEventListener("click",function(e){var b=e.target.closest("[data-s
 
 /* ---------- Examen de prueba ---------- */
 var VF=[
-["La sociedad estamental se dividía según la riqueza de cada persona.",0,"Falso: se dividía por el nacimiento («sangre»), no por motivos económicos."],
-["El diezmo era el 10 % de la cosecha que los campesinos pagaban a la Iglesia.",1,"Verdadero."],
-["Los ricos burgueses formaban parte del estamento privilegiado.",0,"Falso: aunque fueran ricos, eran Estado llano (no privilegiados)."],
-["La Enciclopedia fue dirigida por Voltaire y Rousseau.",0,"Falso: la dirigieron Diderot y D'Alembert."],
-["Montesquieu propuso dividir el poder en legislativo, ejecutivo y judicial.",1,"Verdadero."],
-["La fisiocracia defendía que la riqueza de un país venía del comercio y de los metales preciosos.",0,"Falso: eso es el mercantilismo. La fisiocracia dice que la principal riqueza es la agricultura."],
-["Los déspotas ilustrados renunciaron a su poder absoluto para poder hacer reformas.",0,"Falso: hicieron reformas sin renunciar a su poder absoluto ni a los privilegios."],
-["El Bill of Rights (1689) limitaba los poderes del monarca inglés.",1,"Verdadero."],
-["En los Estados Generales se votaba por persona.",0,"Falso: se votaba por estamento, y por eso los privilegiados ganaban siempre 2 a 1."],
-["El Tercer Estado era aproximadamente el 95 % de la población francesa.",1,"Verdadero."],
-["La Declaración de Derechos de 1789 reconocía los mismos derechos a hombres y mujeres.",0,"Falso: excluía a las mujeres y a los esclavos."],
-["La Constitución de 1791 estableció el sufragio universal masculino.",0,"Falso: estableció el sufragio censitario. El universal masculino llegó en 1792 con la Convención."],
-["Luis XVI fue detenido en Varennes cuando intentaba huir de Francia.",1,"Verdadero (junio de 1791)."],
-["Los girondinos eran los republicanos más radicales de la Convención.",0,"Falso: eran los moderados. Los radicales eran los jacobinos."],
-["Durante el Terror se suspendieron derechos y libertades.",1,"Verdadero."],
-["El Directorio estaba formado por cinco miembros.",1,"Verdadero (desde 1795)."],
-["El golpe de Brumario lo dieron los republicanos moderados en 1794.",0,"Falso: el de 1794 es la reacción termidoriana. El de Brumario lo dio Napoleón en 1799."],
-["El Código Civil de Napoleón daba a la mujer los mismos derechos que al hombre.",0,"Falso: la mujer casada debía obedecer al marido, que administraba sus bienes."],
-["Napoleón fue derrotado definitivamente en la batalla de Waterloo en 1815.",1,"Verdadero."],
-["La primera Constitución de la Francia contemporánea mantenía al rey con el poder ejecutivo y derecho de veto.",1,"Verdadero: la Constitución de 1791."]
+["La sociedad estamental se dividía según la riqueza de cada persona.",0,"Falso, porque se dividía por el nacimiento: un burgués rico seguía siendo no privilegiado."],
+["El diezmo era el 10 % de la cosecha que los campesinos pagaban a la Iglesia.",1,"Verdadero, porque la Iglesia recibía de los campesinos el diezmo, el 10 % de la cosecha."],
+["Los ricos burgueses formaban parte del estamento privilegiado.",0,"Falso, porque los burgueses eran Tercer Estado: tenían dinero, pero no privilegios ni poder político."],
+["La Enciclopedia fue dirigida por Voltaire y Rousseau.",0,"Falso, porque la dirigieron Diderot y D'Alembert (1751-1772)."],
+["Montesquieu propuso dividir el poder en legislativo, ejecutivo y judicial.",1,"Verdadero, porque Montesquieu propuso la división de poderes: parlamento, rey y ministros, y jueces independientes."],
+["La fisiocracia defendía que la riqueza de un país venía del comercio y de los metales preciosos.",0,"Falso, porque eso es el mercantilismo; la fisiocracia decía que la principal riqueza era la agricultura."],
+["Los déspotas ilustrados renunciaron a su poder absoluto para poder hacer reformas.",0,"Falso, porque hicieron reformas sin renunciar a su poder: «Todo para el pueblo, pero sin el pueblo»."],
+["El Bill of Rights (1689) limitaba los poderes del monarca inglés.",1,"Verdadero, porque el Bill of Rights sometió algunas decisiones del rey al parlamento."],
+["En los Estados Generales se votaba por persona.",0,"Falso, porque se votaba por estamento, y nobleza y clero ganaban siempre dos votos contra uno."],
+["El Tercer Estado era aproximadamente el 95 % de la población francesa.",1,"Verdadero, porque los privilegiados (nobleza y clero) eran solo el 5 %."],
+["La Declaración de Derechos de 1789 reconocía los mismos derechos a hombres y mujeres.",0,"Falso, porque excluía a las mujeres y a los esclavos."],
+["La Constitución de 1791 estableció el sufragio universal masculino.",0,"Falso, porque estableció el sufragio censitario: solo votaban los hombres de más de 25 años que pagaban una contribución."],
+["Luis XVI fue detenido en Varennes cuando intentaba huir de Francia.",1,"Verdadero, porque en junio de 1791 intentó huir para encabezar la contrarrevolución y lo detuvieron en Varennes."],
+["Los girondinos eran los republicanos más radicales de la Convención.",0,"Falso, porque los girondinos eran los moderados; los radicales eran los jacobinos."],
+["Durante el Terror se suspendieron derechos y libertades.",1,"Verdadero, porque los jacobinos gobernaron como una dictadura y castigaban con cárcel o guillotina a los sospechosos."],
+["El Directorio estaba formado por cinco miembros.",1,"Verdadero, porque en 1795, tras la reacción termidoriana, el poder pasó a un Directorio de cinco miembros."],
+["El golpe de Brumario lo dieron los republicanos moderados en 1794.",0,"Falso, porque el golpe de 1794 fue la reacción termidoriana; el de Brumario lo dio Napoleón en 1799."],
+["El Código Civil de Napoleón daba a la mujer los mismos derechos que al hombre.",0,"Falso, porque la mujer casada debía obedecer al marido, que administraba sus bienes."],
+["Napoleón fue derrotado definitivamente en la batalla de Waterloo en 1815.",1,"Verdadero, porque tras Waterloo (1815) lo confinaron en la isla de Santa Elena, donde murió en 1821."],
+["La Constitución de 1791 mantenía al rey con el poder ejecutivo y derecho de veto.",1,"Verdadero, porque había separación de poderes, pero el rey conservaba el ejecutivo y podía vetar las leyes."]
+];
+var JUST=[
+["¿Era la sociedad estamental una sociedad igualitaria? Justifica tu respuesta.","No, porque los derechos dependían del nacimiento: nobleza y clero no pagaban impuestos y tenían tribunales propios, mientras el Tercer Estado, el 95 % de la población, pagaba impuestos y rentas sin tener derechos."],
+["¿Por qué eran tan graves las crisis de subsistencia? Justifica tu respuesta.","Porque la agricultura tenía rendimientos bajos y se producía para el autoconsumo; una mala cosecha subía el precio del trigo y traía hambre, epidemias y revueltas."],
+["¿Por qué la burguesía quería cambiar el Antiguo Régimen? Justifica tu respuesta.","Porque se había enriquecido con el comercio pero seguía en el Tercer Estado, sin privilegios ni poder político. Quería libertad económica, igualdad ante la ley y soberanía nacional."],
+["¿Por qué la Ilustración ponía en peligro el Antiguo Régimen? Justifica tu respuesta.","Porque criticaba sus bases: frente al derecho divino del rey defendía la soberanía nacional y la división de poderes, y frente a los privilegios, la igualdad ante la ley y el mérito."],
+["¿Fue el Despotismo Ilustrado una forma de absolutismo? Justifica tu respuesta.","Sí, porque los reyes hicieron reformas ilustradas sin renunciar a su poder absoluto ni a los privilegios: «Todo para el pueblo, pero sin el pueblo»."],
+["¿Era Inglaterra una monarquía absoluta en el siglo XVIII? Justifica tu respuesta.","No, porque tenía un régimen parlamentario: un parlamento elegido hacía las leyes y controlaba al gobierno, y el Habeas Corpus (1679) y el Bill of Rights (1689) limitaban al rey."],
+["¿Por qué abandonó el Tercer Estado los Estados Generales? Justifica tu respuesta.","Porque se votaba por estamento y nobleza y clero sumaban dos votos contra uno, así que sus peticiones nunca salían. Formaron la Asamblea Nacional y aprobaron el voto por persona."],
+["¿Fue 1789 el año del Tercer Estado? Justifica tu respuesta.","Sí, porque el Tercer Estado formó la Asamblea Nacional, el pueblo de París tomó la Bastilla el 14 de julio y en agosto se abolieron los privilegios y se aprobó la Declaración de Derechos."],
+["¿Era democrática la Constitución de 1791? Justifica tu respuesta.","No del todo: tenía separación de poderes, igualdad ante la ley y soberanía nacional, pero el sufragio era censitario (solo hombres de más de 25 años que pagaban) y el rey podía vetar las leyes."],
+["¿Aceptó Luis XVI la monarquía constitucional? Justifica tu respuesta.","No, porque no admitía que le impusieran leyes: en junio de 1791 intentó huir para encabezar la contrarrevolución y lo detuvieron en Varennes. Desde entonces lo consideraron un traidor."],
+["¿Por qué se proclamó la república en 1792? Justifica tu respuesta.","Por la traición del rey y la invasión austriaca: los sans-culottes asaltaron las Tullerías, encarcelaron a los reyes, y la Convención, elegida por sufragio universal masculino, proclamó la república."],
+["¿Fue positivo o negativo el gobierno jacobino? Justifica tu respuesta.","Tuvo las dos caras: reconoció derechos sociales, la enseñanza obligatoria y el salario mínimo y frenó la invasión con la leva en masa, pero suspendió los derechos y con el Terror guillotinó a los sospechosos."],
+["¿Por qué parte de la burguesía apoyó el golpe de Napoleón? Justifica tu respuesta.","Porque veía ineficaz al Directorio y quería que el ejército garantizase el orden y la estabilidad económica, frenando tanto a los absolutistas como a las clases populares."],
+["¿Fue Napoleón un heredero de la Revolución? Justifica tu respuesta.","En parte: sus códigos mantuvieron la igualdad ante la ley, la propiedad y la libertad individual, pero gobernó como dictador, con censura y sin declaración de derechos."],
+["¿Por qué fracasó el Imperio napoleónico? Justifica tu respuesta.","Porque los pueblos ocupados lo rechazaron por invasor, no pudo ocupar Rusia, tuvo problemas en España y una coalición dirigida por Gran Bretaña lo derrotó (Waterloo, 1815)."]
 ];
 var HUECOS=[
 "Luis XVI convocó los {Estados Generales} el 5 de mayo de 1789. Como se votaba por {estamento}, los privilegiados siempre ganaban. Los representantes del Tercer Estado se constituyeron en {Asamblea Nacional} y en la sala del {Juego de Pelota|Jeu de Paume} juraron seguir reunidos hasta aprobar una {Constitución}. El 14 de julio el pueblo de París asaltó la {Bastilla}.",
@@ -1138,20 +1174,21 @@ function pickCrono(n){var pool=shuffle(EV),set=[];for(var i=0;i<pool.length&&set
 function buildExam(){
   ex={test:shuffle(Q).slice(0,10).map(function(q){return {q:q,ord:shuffle([0,1,2,3])};}),
       vf:shuffle(VF).slice(0,6),
+      just:shuffle(JUST).slice(0,2),
       hue:HUECOS[Math.floor(Math.random()*HUECOS.length)],
       cr:pickCrono(5),
       def:shuffle(DEFS).slice(0,2).map(function(n){return FICHAS.filter(function(f){return f[0]===n;})[0];}),
       dev:DEV[Math.floor(Math.random()*DEV.length)],
       sent:false,t0:Date.now()};
   var h="";
-  h+='<div class="exsec"><h3>1. Test<span class="pts">3 puntos · 0,3 cada una · los fallos no restan</span></h3>';
+  h+='<div class="exsec"><h3>1. Test<span class="pts">2 puntos · 0,2 cada una · los fallos no restan</span></h3>';
   ex.test.forEach(function(it,i){
     h+='<div class="exq" id="eq'+i+'"><div class="enun">'+(i+1)+'. '+esc(it.q[0])+'</div>'+it.ord.map(function(o,k){var id="e-t"+i+"-"+o;return '<label class="ch" for="'+id+'" data-o="'+o+'"><input type="radio" name="et'+i+'" id="'+id+'" value="'+o+'"><span>'+"abcd"[k]+') '+esc(it.q[1][o])+'</span></label>';}).join("")+'<div class="fuente" hidden></div></div>';
   });
   h+='</div>';
-  h+='<div class="exsec"><h3>2. Verdadero o falso<span class="pts">1,5 puntos · 0,25 cada una</span></h3><div>';
+  h+='<div class="exsec"><h3>2. Verdadero o falso. Justifica tu respuesta<span class="pts">1,5 puntos · 0,25 cada una: 0,1 por V/F y 0,15 por la justificación</span></h3><div>';
   ex.vf.forEach(function(v,i){
-    h+='<div class="vfrow" id="ev'+i+'"><span>'+esc(v[0])+'</span><span class="vfbtns"><label for="e-v'+i+'-1"><input type="radio" name="ev'+i+'" id="e-v'+i+'-1" value="1">V</label><label for="e-v'+i+'-0"><input type="radio" name="ev'+i+'" id="e-v'+i+'-0" value="0">F</label></span></div>';
+    h+='<div class="vfrow" id="ev'+i+'"><span>'+esc(v[0])+'</span><span class="vfbtns"><label for="e-v'+i+'-1"><input type="radio" name="ev'+i+'" id="e-v'+i+'-1" value="1">V</label><label for="e-v'+i+'-0"><input type="radio" name="ev'+i+'" id="e-v'+i+'-0" value="0">F</label></span><textarea id="e-vj'+i+'" placeholder="Porque…" aria-label="Justificación"></textarea></div>';
   });
   h+='</div></div>';
   var bi=0;
@@ -1167,26 +1204,37 @@ function buildExam(){
     h+='<div class="exq"><label class="enun" for="e-d'+i+'">'+esc(f[0])+'</label><textarea id="e-d'+i+'" style="min-height:5em"></textarea><div id="e-dm'+i+'" hidden></div></div>';
   });
   h+='</div>';
-  h+='<div class="exsec"><h3>6. Pregunta larga<span class="pts">2 puntos</span></h3><div class="enun">'+esc(ex.dev[0])+'</div><textarea id="e-dev" style="min-height:14em" aria-label="Respuesta de la pregunta larga"></textarea><div id="e-devm" hidden></div></div>';
+  h+='<div class="exsec"><h3>6. Justifica tu respuesta<span class="pts">1 punto · 0,5 cada una</span></h3>';
+  ex.just.forEach(function(q,i){
+    h+='<div class="exq"><label class="enun" for="e-j'+i+'">'+esc(q[0])+'</label><textarea id="e-j'+i+'" style="min-height:5em" placeholder="Respuesta + porque + dato del libro"></textarea><div id="e-jm'+i+'" hidden></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="exsec"><h3>7. Pregunta larga<span class="pts">2 puntos</span></h3><div class="enun">'+esc(ex.dev[0])+'</div><textarea id="e-dev" style="min-height:14em" aria-label="Respuesta de la pregunta larga"></textarea><div id="e-devm" hidden></div></div>';
   $("e-body").innerHTML=h;
   $("e-result").hidden=true;$("e-send").hidden=false;$("e-state").textContent="Sin entregar";
   clearInterval(exTimer);
   exTimer=setInterval(function(){var s=Math.floor((Date.now()-ex.t0)/1000);$("e-time").textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");},1000);
   $("e-time").textContent="00:00";
 }
+function selfMark(name,opts){return opts.map(function(o,k){var id="e-"+name+"-"+k;return '<label for="'+id+'"><input type="radio" name="'+name+'" id="'+id+'" value="'+o[0]+'">'+o[1]+'</label>';}).join("");}
 function val(name){var c=document.querySelector('input[name="'+name+'"]:checked');return c?+c.value:null;}
 function correctExam(){
   clearInterval(exTimer);ex.sent=true;
   var p={test:0,vf:0,hue:0,cr:0};
   ex.test.forEach(function(it,i){
     var v=val("et"+i),box=$("eq"+i);
-    if(v===it.q[2])p.test+=0.3;
+    if(v===it.q[2])p.test+=0.2;
     [].slice.call(box.querySelectorAll("label.ch")).forEach(function(l){var o=+l.dataset.o;if(o===it.q[2])l.classList.add("right");else if(o===v)l.classList.add("wrong");});
     var f=box.querySelector(".fuente");f.textContent=(v===null?"Sin contestar. ":"")+it.q[3];f.hidden=!it.q[3]&&v!==null;
   });
   ex.vf.forEach(function(v,i){
-    var a=val("ev"+i),ok=a===v[1];if(ok)p.vf+=0.25;
-    $("ev"+i).insertAdjacentHTML("beforeend",'<div class="fix '+(ok?"ok":"ko")+'">'+(a===null?"Sin contestar. ":ok?"Bien. ":"Mal. ")+esc(v[2])+'</div>');
+    var a=val("ev"+i),ok=a===v[1];if(ok)p.vf+=0.1;
+    $("ev"+i).insertAdjacentHTML("beforeend",'<div class="fix '+(ok?"ok":"ko")+'">'+(a===null?"Sin contestar. ":ok?"V/F bien. ":"V/F mal. ")+'<strong>Justificación modelo:</strong> '+esc(v[2])+'<div class="selfmark" style="margin-top:6px">'+selfMark("evj"+i,[["0.15","Mi justificación está bien"],["0.075","A medias"],["0","Mal o en blanco"]])+'</div></div>');
+  });
+  ex.just.forEach(function(q,i){
+    var m=$("e-jm"+i);
+    m.innerHTML='<div class="modelo"><p><strong>Modelo:</strong> '+esc(q[1])+'</p></div><p class="fuente">¿Has respondido, dicho el porqué y dado un dato del libro?</p><div class="selfmark">'+selfMark("ej"+i,[["0.5","Las tres cosas (0,5)"],["0.25","Falta el porqué o el dato (0,25)"],["0","Mal o en blanco (0)"]])+'</div>';
+    m.hidden=false;
   });
   var ans=[];ex.hue.replace(/\{([^}]+)\}/g,function(_,a){ans.push(a.split("|"));return "";});
   ans.forEach(function(alts,i){
@@ -1209,7 +1257,7 @@ function correctExam(){
   var dm=$("e-devm");
   dm.innerHTML='<p class="fuente">Marca los puntos que aparecen en tu respuesta. Cada punto vale lo mismo y entre todos suman 2.</p><ul class="checks">'+ex.dev[1].map(function(pt,j){var id="e-dk"+j;return '<li><label for="'+id+'"><input type="checkbox" id="'+id+'"><span>'+esc(pt)+'</span></label></li>';}).join("")+'</ul><details><summary class="btn" style="display:inline-block">Ver respuesta modelo</summary><div class="modelo" style="margin-top:10px">'+ex.dev[2].split("\n").map(function(t){return "<p>"+esc(t)+"</p>";}).join("")+'</div></details>';
   dm.hidden=false;
-  [].slice.call($("e-body").querySelectorAll("input:not([name^=edm]):not([id^=e-dk]),select,textarea")).forEach(function(x){x.disabled=true;});
+  [].slice.call($("e-body").querySelectorAll("input:not([name^=edm]):not([name^=evj]):not([name^=ej]):not([id^=e-dk]),select,textarea")).forEach(function(x){x.disabled=true;});
   ex.auto=p;ex.saved=false;
   $("e-send").hidden=true;$("e-state").textContent="Entregado";
   $("e-result").hidden=false;updateNota();
@@ -1217,17 +1265,18 @@ function correctExam(){
 }
 function updateNota(){
   if(!ex||!ex.sent)return;
-  var p=ex.auto,d=0,dpend=0;
-  ex.def.forEach(function(_,i){var v=document.querySelector('input[name="edm'+i+'"]:checked');if(v)d+=+v.value;else dpend++;});
+  var p=ex.auto,dpend=0;
+  function self(prefix,count){var s=0;for(var i=0;i<count;i++){var v=document.querySelector('input[name="'+prefix+i+'"]:checked');if(v)s+=+v.value;else dpend++;}return s;}
+  var d=self("edm",ex.def.length),vfj=self("evj",ex.vf.length),js=self("ej",ex.just.length);
   var n=ex.dev[1].length,k=0;for(var j=0;j<n;j++)if($("e-dk"+j).checked)k++;
-  var dev=2*k/n,total=p.test+p.vf+p.hue+p.cr+d+dev;
-  var rows=[["1. Test",p.test,3],["2. Verdadero o falso",p.vf,1.5],["3. Completa el texto",p.hue,1.5],["4. Cronología",p.cr,1],["5. Definiciones",d,1],["6. Pregunta larga",dev,2]];
+  var dev=2*k/n,total=p.test+p.vf+vfj+p.hue+p.cr+d+js+dev;
+  var rows=[["1. Test",p.test,2],["2. Verdadero o falso",p.vf+vfj,1.5],["3. Completa el texto",p.hue,1.5],["4. Cronología",p.cr,1],["5. Definiciones",d,1],["6. Justifica tu respuesta",js,1],["7. Pregunta larga",dev,2]];
   $("e-desglose").innerHTML="<tr><th>Parte</th><th>Nota</th></tr>"+rows.map(function(r){return "<tr><td>"+r[0]+'</td><td class="mono">'+fmt(r[1])+" / "+fmt(r[2])+"</td></tr>";}).join("")+'<tr><th>Total</th><th class="mono">'+fmt(total)+" / 10</th></tr>";
   $("e-nota").textContent=fmt(total);
   $("e-nota").classList.toggle("susp",total<5);
   var flojo=rows.slice().sort(function(a,b){return a[1]/a[2]-b[1]/b[2];})[0][0];
   $("e-msg").textContent=(total>=9?"Sobresaliente.":total>=7?"Notable.":total>=5?"Aprobado, pero repasa.":"Suspenso: vuelve al temario.")+" Lo más flojo: "+flojo+".";
-  $("e-pend").textContent=dpend?"Te falta corregir "+dpend+" definición(es) en la parte 5 para tener la nota final.":"";
+  $("e-pend").textContent=dpend?"Te faltan "+dpend+" respuestas por corregirte tú (partes 2, 5 y 6) para tener la nota final.":"";
   if(!dpend&&!ex.saved){var h=store("notas")||[];h.push(Math.round(total*100)/100);store("notas",h.slice(-20));ex.saved=true;exHist();}
 }
 $("e-go").addEventListener("click",function(){buildExam();$("e-start").hidden=true;$("e-run").hidden=false;window.scrollTo({top:0});});
@@ -1237,6 +1286,11 @@ $("e-send").addEventListener("click",function(){
 });
 $("e-body").addEventListener("change",updateNota);
 $("e-new").addEventListener("click",function(){$("e-run").hidden=true;$("e-start").hidden=false;window.scrollTo({top:0});});
+
+$("j-list").innerHTML=JUST.map(function(q,i){
+  return '<article class="dev"><div class="q">'+esc(q[0])+'</div><div class="row"><button class="btn" data-jshow="'+i+'">Ver respuesta modelo</button></div><div class="modelo" id="j-m'+i+'" hidden><p>'+esc(q[1])+'</p></div></article>';
+}).join("");
+$("j-list").addEventListener("click",function(e){var b=e.target.closest("[data-jshow]");if(!b)return;var m=$("j-m"+b.dataset.jshow);m.hidden=!m.hidden;b.textContent=m.hidden?"Ver respuesta modelo":"Ocultar respuesta";});
 
 /* ---------- Arranque ---------- */
 var h=(location.hash||"").replace("#","");
