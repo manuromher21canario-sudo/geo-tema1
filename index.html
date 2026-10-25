@@ -235,10 +235,23 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
 
 <!-- ============ TEMARIO ============ -->
 <section class="view" id="v-temario">
-  <p class="lead">Los siete puntos del resumen en el orden del libro. Cada uno tiene lo esencial, las fechas que conviene saberse y un recuadro <strong>Ojo en el examen</strong> con lo que más se confunde. El apartado 4 del libro (los Borbones en España) no está en el resumen.</p>
+  <div class="panel" style="display:grid;gap:10px">
+    <h3>Lo que entra en el examen</h3>
+    <div class="tablebox"><table>
+      <tr><th>Apartado</th><th>Páginas del libro</th><th>Bloque</th></tr>
+      <tr><td>1 · ¿Cómo era el Antiguo Régimen?</td><td class="mono">4-5</td><td rowspan="3">Antiguo Régimen</td></tr>
+      <tr><td>2 · Nuevas formas de pensar</td><td class="mono">6-7</td></tr>
+      <tr><td>3 · Alternativa a la monarquía absoluta</td><td class="mono">8 (la 9 no)</td></tr>
+      <tr><td>5 · ¿Fue 1789 el año del Tercer Estado?</td><td class="mono">12-13</td><td rowspan="4">Revolución francesa</td></tr>
+      <tr><td>6 · ¿Aceptó el rey la monarquía constitucional?</td><td class="mono">14-15</td></tr>
+      <tr><td>7 · ¿Qué cambió con la república?</td><td class="mono">16-17</td></tr>
+      <tr><td>8 · ¿Cómo terminó la Revolución?</td><td class="mono">18-19</td></tr>
+    </table></div>
+    <p class="fuente">No entran el apartado 4 (los Borbones, págs. 10-11), la independencia de Estados Unidos (pág. 9) ni nada de la página 20 en adelante. Abajo, cada apartado con lo esencial y un recuadro <strong>Ojo en el examen</strong>.</p>
+  </div>
 
   <details class="apartado" open>
-    <summary><span class="num">1</span><span><span class="dia">Lunes · martes</span><h3>¿Cómo era el Antiguo Régimen?</h3></span><span class="chev">▸</span></summary>
+    <summary><span class="num">1</span><span><span class="dia">Págs. 4-5 · Antiguo Régimen</span><h3>¿Cómo era el Antiguo Régimen?</h3></span><span class="chev">▸</span></summary>
     <div class="body">
       <div><h4>Tres rasgos</h4><p>En el siglo XVIII, las sociedades europeas tenían una <strong>economía agraria tradicional</strong>, estaban divididas en <strong>estamentos</strong> y las gobernaban <strong>monarquías absolutas</strong>.</p></div>
       <div><h4>Economía: agricultura de subsistencia</h4><ul>
@@ -274,7 +287,7 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
   </details>
 
   <details class="apartado">
-    <summary><span class="num">2</span><span><span class="dia">Miércoles</span><h3>¿Qué nuevas formas de pensar surgieron en el siglo XVIII?</h3></span><span class="chev">▸</span></summary>
+    <summary><span class="num">2</span><span><span class="dia">Págs. 6-7 · Antiguo Régimen</span><h3>¿Qué nuevas formas de pensar surgieron en el siglo XVIII?</h3></span><span class="chev">▸</span></summary>
     <div class="body">
       <div><h4>La Ilustración nace del racionalismo</h4><ul>
         <li>La <strong>revolución científica del siglo XVII</strong> fue la base de un movimiento intelectual nuevo en Europa, sobre todo en <strong>Francia</strong>: la Ilustración.</li>
@@ -309,7 +322,7 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
   </details>
 
   <details class="apartado">
-    <summary><span class="num">3</span><span><span class="dia">Jueves</span><h3>¿Qué alternativa se creó frente a la monarquía absoluta?</h3></span><span class="chev">▸</span></summary>
+    <summary><span class="num">3</span><span><span class="dia">Pág. 8 · Antiguo Régimen</span><h3>¿Qué alternativa se creó frente a la monarquía absoluta?</h3></span><span class="chev">▸</span></summary>
     <div class="body">
       <div><h4>Los reyes tenían un poder absoluto</h4><ul>
         <li>Sistema más extendido en Europa. <strong>Hereditario</strong> y de <strong>derecho divino</strong>: la autoridad del rey viene directamente de Dios y su persona es sagrada.</li>
@@ -343,7 +356,7 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
   </details>
 
   <details class="apartado">
-    <summary><span class="num">5</span><span><span class="dia">Viernes</span><h3>La Revolución francesa. ¿Fue 1789 el año del Tercer Estado?</h3></span><span class="chev">▸</span></summary>
+    <summary><span class="num">5</span><span><span class="dia">Págs. 12-13 · Revolución francesa</span><h3>La Revolución francesa. ¿Fue 1789 el año del Tercer Estado?</h3></span><span class="chev">▸</span></summary>
     <div class="body">
       <div><h4>Causas profundas: el descontento</h4><ul>
         <li><strong>Campesinos</strong> (la mayoría): cultivaban tierras que no eran suyas y pagaban impuestos y rentas al rey, a los nobles y a la Iglesia. Con malas cosechas no podían subsistir. Protestaban contra las rentas señoriales y reclamaban la propiedad de la tierra.</li>
@@ -385,7 +398,7 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
   </details>
 
   <details class="apartado">
-    <summary><span class="num">6</span><span><span class="dia">Sábado</span><h3>¿Aceptó el rey la monarquía constitucional?</h3></span><span class="chev">▸</span></summary>
+    <summary><span class="num">6</span><span><span class="dia">Págs. 14-15 · Revolución francesa</span><h3>¿Aceptó el rey la monarquía constitucional?</h3></span><span class="chev">▸</span></summary>
     <div class="body">
       <div><h4>Medidas revolucionarias de la Asamblea</h4><ul>
         <li>La Asamblea Nacional (Tercer Estado más unos pocos nobles y eclesiásticos) se ve como <strong>representante de la nueva nación</strong>: sin privilegios y con todos como <strong>ciudadanos</strong>.</li>
@@ -429,7 +442,7 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
   </details>
 
   <details class="apartado">
-    <summary><span class="num">7</span><span><span class="dia">Domingo</span><h3>¿Qué cambió con la república?</h3></span><span class="chev">▸</span></summary>
+    <summary><span class="num">7</span><span><span class="dia">Págs. 16-17 · Revolución francesa</span><h3>¿Qué cambió con la república?</h3></span><span class="chev">▸</span></summary>
     <div class="body">
       <div><h4>La república</h4><ul>
         <li>La traición del rey y la invasión provocaron una insurrección de los <strong>sans-culottes</strong> (clases populares de París; no llevaban el <em>culotte</em>, pantalón anudado bajo la rodilla de las clases altas). Símbolos: gorro frigio (libertad), pica (pueblo en armas), escarapela tricolor.</li>
@@ -463,7 +476,7 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
   </details>
 
   <details class="apartado">
-    <summary><span class="num">8</span><span><span class="dia">Lunes · martes + repaso</span><h3>¿Cómo terminó la Revolución francesa?</h3></span><span class="chev">▸</span></summary>
+    <summary><span class="num">8</span><span><span class="dia">Págs. 18-19 · Revolución francesa</span><h3>¿Cómo terminó la Revolución francesa?</h3></span><span class="chev">▸</span></summary>
     <div class="body">
       <div><h4>Napoleón toma el poder</h4><ul>
         <li>Parte de la burguesía veía el <strong>Directorio ineficaz</strong>. Pensaban que el <strong>ejército</strong> garantizaría el orden social, la estabilidad económica y el control de la oposición, dominando a absolutistas y a clases populares.</li>
@@ -1043,8 +1056,7 @@ var PERS={
 "Robespierre":["Principal figura del Comité de Salvación Pública durante el Terror."],
 "Napoleón Bonaparte":["General que dio el golpe de Brumario en 1799.","Primer cónsul y después emperador desde 1804.","Derrotado en Waterloo en 1815; murió en Santa Elena en 1821.","Creó los prefectos, los liceos y el Código Civil."],
 "José Bonaparte":["Hermano de Napoleón, nombrado rey de España tras la invasión de 1808."],
-"Madame de Geoffrin":["Organizaba en su salón veladas con grandes personajes ilustrados."],
-"Marqués de Launay":["Gobernador de la Bastilla cuando se produjo la toma; fue detenido y ejecutado."]
+"Madame de Geoffrin":["Organizaba en su salón veladas con grandes personajes ilustrados."]
 };
 var persReady=false,pq=[],pi=0,pok=0;
 function buildPers(){pq=[];Object.keys(PERS).forEach(function(n){PERS[n].forEach(function(d){pq.push([n,d]);});});pq=shuffle(pq);pi=0;pok=0;}
