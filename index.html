@@ -197,6 +197,12 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
 .selfmark label{border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer;font-size:.9rem}
 .selfmark input{position:absolute;opacity:0;pointer-events:none}
 .selfmark label:has(input:checked){background:var(--bleu);border-color:var(--bleu);color:var(--card)}
+/* Para copiar */
+.cp{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:grid;gap:10px}
+.cp h3{font-size:1.3rem;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.cp .pg{font-family:var(--mono);font-size:.8rem;font-weight:400;color:var(--muted)}
+.cp p{max-width:68ch}
+.cp p b{color:var(--rouge)}
 .guia-just ol{margin:4px 0 8px;padding-left:1.3em;display:grid;gap:2px}
 .guia-just p{margin-top:4px}
 .vfrow textarea{grid-column:1/-1;min-height:3.2em}
@@ -221,6 +227,7 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
 <nav class="tabs" aria-label="Secciones">
   <div class="wrap" role="tablist">
     <button class="tab" role="tab" data-tab="temario" aria-selected="true">Temario</button>
+    <button class="tab" role="tab" data-tab="copiar" aria-selected="false">Para copiar</button>
     <button class="tab" role="tab" data-tab="fichas" aria-selected="false">Fichas</button>
     <button class="tab" role="tab" data-tab="test" aria-selected="false">Test</button>
     <button class="tab" role="tab" data-tab="cronologia" aria-selected="false">Cronología</button>
@@ -509,6 +516,70 @@ textarea{font:inherit;color:var(--ink);background:var(--paper);border:1px solid 
       </ul></div>
     </div>
   </details>
+</section>
+
+<!-- ============ PARA COPIAR ============ -->
+<section class="view copiar" id="v-copiar" hidden>
+  <p class="lead">Resumen de todo lo que entra, para copiarlo a mano en el cuaderno. La numeración es la del libro (el apartado 4 no entra). Copia los títulos en otro color y subraya las palabras en negrita.</p>
+
+  <article class="cp">
+    <h3>1. El Antiguo Régimen <span class="pg">págs. 4-5</span></h3>
+    <p><b>1.1 Economía.</b> <strong>Agricultura de subsistencia</strong>: técnicas antiguas, poca producción y autoconsumo. Se usaba la <strong>rotación trienal con barbecho</strong>. Las malas cosechas causaban <strong>crisis de subsistencia</strong>: hambre, epidemias y revueltas.</p>
+    <p><b>1.2 Sociedad estamental.</b> Se dividía por <strong>nacimiento</strong>. <strong>Privilegiados</strong>: nobleza y clero, que no pagaban impuestos (la Iglesia cobraba el <strong>diezmo</strong>, el 10 % de la cosecha). <strong>No privilegiados</strong>: el <strong>Tercer Estado</strong> (campesinos, artesanos y burgueses), sin derechos.</p>
+    <p><b>1.3 Comercio triangular.</b> Europa llevaba armas y telas a África, de allí se llevaban <strong>esclavos</strong> a América, y de América volvían azúcar, algodón y tabaco.</p>
+    <p><b>1.4 Crecimiento.</b> La población creció (sin pandemias ni guerras). Se cultivaron <strong>patata y maíz</strong>, y se produjo más con el <strong>trabajo a domicilio</strong> y las <strong>manufacturas</strong>.</p>
+    <p><b>1.5 La burguesía.</b> Se hizo rica con el comercio, pero seguía sin privilegios ni poder político.</p>
+  </article>
+
+  <article class="cp">
+    <h3>2. La Ilustración <span class="pg">págs. 6-7</span></h3>
+    <p><b>2.1 Qué fue.</b> Movimiento intelectual del <strong>siglo XVIII</strong>, sobre todo en Francia. Usaba la <strong>razón y la observación</strong> en vez de la tradición y confiaba en la ciencia, el progreso y la educación.</p>
+    <p><b>2.2 Revolución científica.</b> Avances como la <strong>vacuna de la viruela</strong> (Jenner) y expediciones como las de <strong>James Cook</strong>.</p>
+    <p><b>2.3 La Enciclopedia.</b> Reunió todo el saber. La dirigieron <strong>Diderot y D'Alembert</strong> (1751-1772), con 35 volúmenes. La censuraron el rey y la Iglesia.</p>
+    <p><b>2.4 Pensadores.</b> <strong>Locke</strong>: derechos naturales (vida, libertad y propiedad). <strong>Voltaire</strong>: un parlamento que limite al rey. <strong>Montesquieu</strong>: división de poderes (legislativo, ejecutivo y judicial). <strong>Rousseau</strong>: contrato social y <strong>soberanía nacional</strong>.</p>
+    <p><b>2.5 Economía.</b> Contra el mercantilismo, la <strong>fisiocracia</strong> decía que la riqueza es la agricultura. Defendían el <strong>liberalismo económico</strong>: libertad, propiedad privada y que el Estado no intervenga.</p>
+  </article>
+
+  <article class="cp">
+    <h3>3. Absolutismo y parlamentarismo <span class="pg">pág. 8</span></h3>
+    <p><b>3.1 Monarquía absoluta.</b> El rey recibe el poder de <strong>Dios</strong> (derecho divino) y tiene los tres poderes. El pueblo son <strong>súbditos</strong> sin derechos. Ejemplo: <strong>Luis XIV</strong>, el Rey Sol (1643-1715).</p>
+    <p><b>3.2 Despotismo Ilustrado.</b> Reyes que hicieron reformas ilustradas sin perder su poder: <strong>«Todo para el pueblo, pero sin el pueblo»</strong>. Catalina de Rusia, Federico II de Prusia y Carlos III de España.</p>
+    <p><b>3.3 Parlamentarismo.</b> En <strong>Inglaterra</strong> y los Países Bajos: separación de poderes y un parlamento elegido que hace las leyes y controla al gobierno. <strong>Habeas Corpus</strong> (1679): libertades individuales. <strong>Bill of Rights</strong> (1689): limita al rey.</p>
+  </article>
+
+  <article class="cp">
+    <h3>5. El inicio de la Revolución francesa <span class="pg">págs. 12-13</span></h3>
+    <p><b>5.1 Causas profundas.</b> Los campesinos pagaban muchos impuestos y rentas, y la burguesía, influida por la Ilustración y la Revolución americana, quería libertad, igualdad y <strong>soberanía nacional</strong>. El Tercer Estado era el <strong>95 %</strong> de la población.</p>
+    <p><b>5.2 Causa inmediata.</b> En 1788 el rey no tenía dinero. <strong>Luis XVI</strong> convocó los <strong>Estados Generales</strong> (5 de mayo de 1789) para que los privilegiados pagaran impuestos.</p>
+    <p><b>5.3 El estallido.</b> Se votaba <strong>por estamento</strong> y los privilegiados ganaban 2 a 1. El Tercer Estado formó la <strong>Asamblea Nacional</strong> y juró en el <strong>Juego de Pelota</strong> hacer una Constitución. El <strong>14 de julio de 1789</strong> el pueblo tomó la <strong>Bastilla</strong>.</p>
+    <p><b>5.4 Etapas.</b> Monarquía constitucional (<strong>1789-1792</strong>), república social (<strong>1792-1794</strong>) y república conservadora (<strong>1794-1799</strong>).</p>
+  </article>
+
+  <article class="cp">
+    <h3>6. La monarquía constitucional <span class="pg">págs. 14-15</span></h3>
+    <p><b>6.1 Primeras medidas.</b> <strong>4 de agosto de 1789</strong>: fin de los privilegios y los derechos señoriales. <strong>26 de agosto</strong>: <strong>Declaración de Derechos del Hombre y del Ciudadano</strong> (dejaba fuera a mujeres y esclavos).</p>
+    <p><b>6.2 Constitución de 1791.</b> Separación de poderes (el rey tiene el ejecutivo y puede <strong>vetar</strong> leyes), igualdad ante la ley y soberanía nacional. <strong>Sufragio censitario</strong>: solo votan los hombres de más de 25 años que pagan.</p>
+    <p><b>6.3 Otras reformas.</b> Fin de los gremios y libertad económica. <strong>Constitución civil del clero</strong>: se vendieron los bienes de la Iglesia. Se creó la <strong>Guardia Nacional</strong>.</p>
+    <p><b>6.4 Contrarrevolución.</b> El rey, los nobles y la Iglesia estaban en contra. Luis XVI intentó huir y lo detuvieron en <strong>Varennes</strong> (1791). En 1792 empezó la guerra contra <strong>Austria y Prusia</strong>.</p>
+    <p><b>6.5 Grupos políticos.</b> Absolutistas, monárquicos constitucionalistas y republicanos: <strong>girondinos</strong> (moderados) y <strong>jacobinos</strong> (radicales).</p>
+  </article>
+
+  <article class="cp">
+    <h3>7. La república <span class="pg">págs. 16-17</span></h3>
+    <p><b>7.1 Proclamación.</b> Los <strong>sans-culottes</strong> asaltaron las <strong>Tullerías</strong> (agosto de 1792). La <strong>Convención</strong>, elegida por <strong>sufragio universal masculino</strong>, proclamó la república (septiembre de 1792) y ganó en <strong>Valmy</strong>.</p>
+    <p><b>7.2 Ejecución de los reyes.</b> <strong>Luis XVI</strong> y <strong>María Antonieta</strong> fueron guillotinados en <strong>1793</strong>. Media Europa declaró la guerra a Francia.</p>
+    <p><b>7.3 El Terror.</b> En 1793 mandan los <strong>jacobinos</strong>, con <strong>Robespierre</strong> y el Comité de Salvación Pública. Hacen la <strong>leva en masa</strong>, reconocen derechos sociales y fijan precios máximos, pero gobiernan como una dictadura y guillotinan a los sospechosos.</p>
+    <p><b>7.4 El Directorio.</b> Golpe de los moderados en <strong>1794</strong> (<strong>reacción termidoriana</strong>). En 1795, el <strong>Directorio</strong>, de 5 miembros, gobierna con mucha inestabilidad.</p>
+  </article>
+
+  <article class="cp">
+    <h3>8. Napoleón y el fin de la Revolución <span class="pg">págs. 18-19</span></h3>
+    <p><b>8.1 Golpe de Brumario.</b> En <strong>1799</strong> <strong>Napoleón</strong> da un golpe de Estado y acaba con el Directorio y con la Revolución.</p>
+    <p><b>8.2 Consulado (1799-1804).</b> Napoleón, como primer cónsul, gobierna como un <strong>dictador</strong>: sin declaración de derechos y con censura.</p>
+    <p><b>8.3 Reformas.</b> Crea los <strong>prefectos</strong> y los <strong>liceos</strong>, firma el <strong>Concordato</strong> con la Iglesia (1801) y aprueba el <strong>Código Civil</strong> (1804): igualdad ante la ley y propiedad, pero la mujer queda sometida al marido.</p>
+    <p><b>8.4 Imperio.</b> En <strong>1804</strong> se corona <strong>emperador</strong> y conquista Europa. Invade España en 1808 y pone de rey a su hermano <strong>José Bonaparte</strong>. Los pueblos ocupados lo rechazan por invasor.</p>
+    <p><b>8.5 Caída.</b> Fracasa en Rusia y en España, y una coalición dirigida por Gran Bretaña lo vence. Derrota final en <strong>Waterloo</strong> (<strong>1815</strong>). Muere desterrado en <strong>Santa Elena</strong> (1821).</p>
+  </article>
 </section>
 
 <!-- ============ FICHAS ============ -->
